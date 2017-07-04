@@ -118,11 +118,14 @@ textarea { text-transform: uppercase; }
 		<link href="tablero_files/uientableencharteditoren.css" type="text/css" rel="stylesheet">
 		<script src="tablero_files/formatendefaultenuientableenorgchartenmotionchartengaugeenann.js" type="text/javascript"></script>
 		<script type="text/javascript">
-		$( document ).ready(function() {
+		$( document ).ready(function() {			
+			
             google.load("visualization", "1", {packages:["corechart", "charteditor"]});
             $(function(){
             	$.noConflict();
                 var derivers = $.pivotUtilities.derivers;
+                var renderers = $.extend($.pivotUtilities.renderers, 
+                        $.pivotUtilities.export_renderers);
 
 				
                 $.getJSON("/ajaxSelects?accion=getPivotPerfilInstitucional", function(mps) {
@@ -131,7 +134,9 @@ textarea { text-transform: uppercase; }
                             $.pivotUtilities.renderers, 
                             $.pivotUtilities.gchart_renderers, 
                             $.pivotUtilities.d3_renderers
-                            )/*,
+                            ),
+                            rendererName: "TSV Export"/*,                            
+                            /*,
                         derivedAttributes: {
                             "Age Bin": derivers.bin("Age", 10),
                             "Gender Imbalance": function(mp) {

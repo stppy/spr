@@ -345,9 +345,9 @@ if (user != null) { %>
 				var url="";
 				
 				if (rol_jsp == 0){
-					url = 'http://spr.stp.gov.py/ajaxSelects?accion=getNiveles';				
+					url = 'http://spr.stp.gov.py/ajaxSelects?accion=getNiveles&borrado=false';				
 				} else {
-					url = 'http://spr.stp.gov.py/ajaxSelects?accion=getNiveles&nivel='+usr_nivel_id;
+					url = 'http://spr.stp.gov.py/ajaxSelects?accion=getNiveles&borrado=false&nivel='+usr_nivel_id;
 				}
 				
 			   	  var listaDatalist=document.getElementsByTagName('datalist');
@@ -1033,9 +1033,9 @@ if (user != null) { %>
 			  var url="";
 			
 			  if (rol_jsp == 0){
-				  url = 'http://spr.stp.gov.py/ajaxSelects?accion=getNiveles';				
+				  url = 'http://spr.stp.gov.py/ajaxSelects?accion=getNiveles&borrado=false';				
 			  } else {
-				  url = 'http://spr.stp.gov.py/ajaxSelects?accion=getNiveles&nivel='+usr_nivel_id;
+				  url = 'http://spr.stp.gov.py/ajaxSelects?accion=getNiveles&borrado=false&nivel='+usr_nivel_id;
 			  }
 		   	  
 		      var datosNiveles = $.ajax({

@@ -174,7 +174,8 @@ public class ajaxSelects extends HttpServlet {
     	Integer mesPND=null;    	
     	Integer moduloId = null;
     	Integer tipoProducto = null;
-  	
+    	Integer periodoId = null;
+    	Integer versionId = null;
     	
     	if (request.getParameter("usuario")!=null) usuario=request.getParameter("usuario");
     	if (request.getParameter("cantidad")!=null) cantidad = Integer.parseInt(request.getParameter("cantidad"));
@@ -276,7 +277,9 @@ public class ajaxSelects extends HttpServlet {
       	if (request.getParameter("depto")!=null) depto = Integer.parseInt(request.getParameter("depto"));		
       	if (request.getParameter("mesPND")!=null) mesPND = Integer.parseInt(request.getParameter("mesPND"));
       	if (request.getParameter("moduloId")!=null) moduloId= Integer.parseInt(request.getParameter("moduloId"));
-      	if (request.getParameter("tipoProducto")!=null) tipoProducto= Integer.parseInt(request.getParameter("tipoProducto"));      	
+      	if (request.getParameter("periodoId")!=null) periodoId= Integer.parseInt(request.getParameter("periodoId"));
+      	if (request.getParameter("versionId")!=null) versionId= Integer.parseInt(request.getParameter("versionId"));      	
+
     	
       	
         PrintWriter out = response.getWriter();
@@ -1294,6 +1297,7 @@ public class ajaxSelects extends HttpServlet {
         		if (entidad!= null) condicion += " and entidad_id ='"+entidad.toString()+"'";
         		if (nivel != null) condicion += " and nivel_id ='"+nivel.toString()+"'";        		
         		if (borrado!=null) condicion += " and borrado is "+ borrado;
+        		//if (anio!=null) condicion += " and anho ="+ anio.toString();
         		/*if (productoId != null) condicion += " and producto_id ='"+productoId+"'";
         		if (proyectoId != null) condicion += " and proyecto_id ='"+proyectoId+"'";
         		if (subprogramaId != null) condicion += " and subprograma_id ='"+subprogramaId+"'";
@@ -1707,6 +1711,8 @@ public class ajaxSelects extends HttpServlet {
 //        	}
         	if (accion.equals("getAsignacionPresiVersion")){
         		List objetos=null;
+        		//if (nivel == null) nivel = Integer.parseInt(nivelCas);
+        		//if (entidad ==null) entidad =  Integer.parseInt(entidadCas);
 				objetos = SqlSelects.selectAllAsignacionPresiVersion(anho,nivel,entidad,versionReporte);
         		JsonElement json = new Gson().toJsonTree(objetos );
         		
@@ -2452,7 +2458,7 @@ public class ajaxSelects extends HttpServlet {
         /*******Producto fisico*****/
     	if (accion.equals("getPivotProductoFisico")){
     		List objetos=null;
-    		objetos = SqlSelects.selectProductoFisico(anio,nivel,entidad,tipoPresupuesto,programa,subprograma,proyecto);
+    		objetos = SqlSelects.selectProductoFisico(anho,nivel,entidad,tipoPresupuesto,programa,subprograma,proyecto);
     		JsonElement json = new Gson().toJsonTree(objetos );
     		out.println(json.toString());return;
     		//out.println(objetos);return;
@@ -2477,6 +2483,41 @@ public class ajaxSelects extends HttpServlet {
 			try {objetos = SqlSelects.selectAllObjetoGasto(condition);}
 			catch (SQLException e) {e.printStackTrace();}      		
     		out.println(objetos);return;
+    	}
+    	//Consulta a la base de datos tablero
+    	if (accion.equals("getPeriodo")){
+    		List objetos=null; 
+    		condition = " where true ";
+    		if (periodoId!=null) condition += " and id ='"+periodoId+"'"; 
+       		try {objetos = SqlSelects.selectPeriodo(condition);}
+    		catch (SQLException e) {e.printStackTrace();}
+    		JsonElement json = new Gson().toJsonTree(objetos );
+    		out.println(json.toString());
+    	} 
+    	if (accion.equals("getVersion")){
+    		List objetos=null; 
+    		condition = " where true ";
+    		if (anho!=null) condition += " and anho ="+anho; 
+    		if (versionId!=null) condition += " and nro ='"+versionId+"'"; 
+       		try {objetos = SqlSelects.selectVersion(condition);}
+    		catch (SQLException e) {e.printStackTrace();}
+    		JsonElement json = new Gson().toJsonTree(objetos );
+    		out.println(json.toString());
+    	}   	
+    	//Estado de peticion de publicaciones
+    	if (accion.equals("getEstadoPeticion")){
+    		List objetos=null; 
+    		condition = " where true ";
+    		/*if (!userRoleId.equals("0") && !userRoleId.equals("1")){ 
+				condition += " and entidad_id="+userEntidadId+" and nivel_id="+userNivelId;
+	    		if ( !userUnrId.equals("0") ){
+	    			condition+= " and unidad_responsable_id="+userUnrId;
+	    		}
+			};*/
+       		try {objetos = SqlSelects.selectEstadoPeticion(condition);}
+    		catch (SQLException e) {e.printStackTrace();}
+    		JsonElement json = new Gson().toJsonTree(objetos );
+    		out.println(json.toString());
     	}
     	out.close();
  

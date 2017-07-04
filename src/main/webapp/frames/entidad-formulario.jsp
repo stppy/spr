@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page contentType="text/html; charset=UTF-8"%>
-				<form class="form-horizontal" role="form" id="formulario" action="http://spr.stp.gov.py/ajaxUpdate" method="post">
+<%@ page contentType="text/html; charset=UTF-8"%>				
+				<form class="form-horizontal" role="form" id="formulario">
 					<input type="hidden" name="id" id="id" anho="id" value="id">
 					<input type="hidden" name="anho" id="anho" anho="2017" value="2017">
 					<input type="hidden" name="nivel"  id="nivel" anho="2017" value="">
@@ -120,12 +120,24 @@
                     
                   
                   <div class="box-footer">
-                    	<% if (attributes.get("role_id").toString().equals("0") || attributes.get("role_id").toString().equals("1")){%>
-                    	<button type="submit" class="btn btn-primary" id="guardar-entidad">Guardar</button>                    	
-                    	<%}%>
-                  		<!-- <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalPresupuestoIngreso" id="botonPresupuestoIngreso">Presupuesto Ingreso</button> -->
-                    	<small id="fechaUltActInstitucion"></small>
-                    </div>
+                  	<div class="row">      
+                  		<div class="col-md-3">
+	                    	<% if (attributes.get("role_id").toString().equals("0") || attributes.get("role_id").toString().equals("1")  || attributes.get("role_id").toString().equals("2")){%>
+	                    	<button type="button" class="btn btn-primary" id="guardar-entidad">Guardar</button>                    	
+	                    	<%}%>	                    	
+                  		</div>
+                  		<div class="col-md-6">
+                  			<% if (attributes.get("role_id").toString().equals("2")){%>
+	                  			<div id="contenedorSelectorEstadoPeticion">
+	                  			</div>
+                  			<%}%>	
+                  		</div>                  		
+                  		<div class="col-md-3">
+	                  		<!-- <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalPresupuestoIngreso" id="botonPresupuestoIngreso">Presupuesto Ingreso</button> -->
+	                    	<small id="fechaUltActInstitucion"></small>
+                  		</div>            	            	
+                  	</div>
+                  </div>
 
 				</form>
 				

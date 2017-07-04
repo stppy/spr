@@ -25,12 +25,12 @@ $( document ).ready(function() {
 		        '        <div class="modal-dialog">'+
 		     '            <div class="modal-content">'+
 		     '                 <div class="modal-body alert-danger">'+
-		     '                        <div class="alert-danger">'+
+		     '                    <div class="alert-danger">'+
 		     '                        <h3 class="text-center">ERROR AL GUARDAR EL REGISTRO.</h3>'+
-		     '                        <h3 class="text-center">FAVOR CONTACTAR A: </h3>'+
+//		     '                        <h3 class="text-center">FAVOR CONTACTAR A: </h3>'+
 		     '                    </div>'+
-		     '                </div>'+
-		     '                 <div class="modal-footer">'+
+		     '                 </div>'+
+/*		     '                 <div class="modal-footer">'+
 		     '                    <div class="box box-danger" height="1000px">'+
 		     '                        <div class="box-header with-border" height="1000px"  align="left">'+
 		     '                            <h3 class="box-title" id="tituloTipoPrograma">'+
@@ -58,7 +58,7 @@ $( document ).ready(function() {
 		     '                            </table> '+
 		     '                        </div>'+
 		     '                    </div>'+
-		     '                </div>'+
+		     '                </div>'+*/
 		     '            </div> '+
 		     '        </div>'+
 		     '    </div>';
@@ -69,6 +69,31 @@ $( document ).ready(function() {
 	function numeroConComa(x) {
 		return x.toString().replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 	}
+	
+	/********Solicitud de aprobacion de publicacion*********/
+	var estadoPeticion = $.ajax({
+        url:'/ajaxSelects?accion=getEstadoPeticion',
+        type:'get',
+        dataType:'json',
+        async:false       
+      }).responseText;
+	estadoPeticion = JSON.parse(estadoPeticion);
+	
+	var optionEstadoPeticion = "";
+	for (e=0; e<estadoPeticion.length; e++){
+		if(estadoPeticion[e].id == 1){
+			optionEstadoPeticion+='<option value="'+estadoPeticion[e].id+'" selected>'+estadoPeticion[e].nombre+'</option>';
+		}else{			
+			optionEstadoPeticion+='<option value="'+estadoPeticion[e].id+'">'+estadoPeticion[e].nombre+'</option>';
+		}
+	}
+	
+	var selectorEstado ='<label class="col-*sm-2 control-label">Estado de aprobación: </label>'+
+						'<select class="form-control" id="estadoPeticion">'+
+							optionEstadoPeticion+
+						'</select>'; 
+	$("#contenedorSelectorEstadoPeticion").append(selectorEstado); 
+	
 	
 	$("body").on("click", "#guardar-entidad",function(event){
 		var entidad = "actInstitucion";

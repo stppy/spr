@@ -957,10 +957,10 @@ function Combo(){
 		var band;
 		var cont = 0;
 		var todosLosProductos = [];
-		var contador;
+		var contador=0;
 			
 		var todosLosProductosHacienda = $.ajax({
-          url:'/ajaxSelects?accion=getPivotProductoFisico&nivel='+linkNivel+'&entidad='+linkEntidad+'&tipoPresupuesto='+linkTipoPresupuesto+'&programa='+linkPrograma+'&subprograma='+linkSubPrograma+'&proyecto='+linkProyecto,
+          url:'/ajaxSelects?accion=getPivotProductoFisico&nivel='+linkNivel+'&entidad='+linkEntidad+'&tipoPresupuesto='+linkTipoPresupuesto+'&programa='+linkPrograma+'&subprograma='+linkSubPrograma+'&proyecto='+linkProyecto+'&anho='+anho,
           type:'get',
           dataType:'json',
           async:false       
@@ -999,6 +999,7 @@ function Combo(){
           
   		for(r = 0;r<datosProductos.producto.length; r++){
   			todosLosProductos.push(datosProductos.producto[r].producto_id);
+  			$("#programacionFisica-"+linkNivel+'-'+linkEntidad+'-'+linkTipoPresupuesto+'-'+linkPrograma+'-'+linkSubPrograma+'-'+linkProyecto+'-'+datosProductos.producto[r].producto_id).remove(); //borra el modal si por ahi busca la misma estructura pero con el periodo diferente
 		}
         
 		for(var i = 0;i<productos.length; i++){
@@ -1571,7 +1572,7 @@ function Combo(){
 			//metasProducto = [];
 			totalMetaC = 0;
 			totalMetaN = 0;
-			cont = 0
+			cont = 0;
 			
 
 			function colorear(num1,num2 ){
@@ -1693,6 +1694,21 @@ function Combo(){
     					'<th id="sumaMesSPR-'+linkNivel+'-'+linkEntidad+'-'+linkTipoPresupuesto+'-'+linkPrograma+'-'+linkSubPrograma+'-'+linkProyecto+'-'+linkProducto+'-10">'+parseFloat(sumaMes[10]).round(2)+'</th>'+
     					'<th id="sumaMesSPR-'+linkNivel+'-'+linkEntidad+'-'+linkTipoPresupuesto+'-'+linkPrograma+'-'+linkSubPrograma+'-'+linkProyecto+'-'+linkProducto+'-11">'+parseFloat(sumaMes[11]).round(2)+'</th>'+
     					'<th id="sumaMesSPR-'+linkNivel+'-'+linkEntidad+'-'+linkTipoPresupuesto+'-'+linkPrograma+'-'+linkSubPrograma+'-'+linkProyecto+'-'+linkProducto+'-12">'+parseFloat(sumaMes[12]).round(2)+'</th>';
+    					
+    					contador = 0;
+    					if(sumaMes[1] != 0 )contador = contador + 1;
+    					if(sumaMes[2] != 0 )contador = contador + 1;
+    					if(sumaMes[3] != 0 )contador = contador + 1;
+    					if(sumaMes[4] != 0 )contador = contador + 1;
+    					if(sumaMes[5] != 0 )contador = contador + 1;
+    					if(sumaMes[6] != 0 )contador = contador + 1;
+    					if(sumaMes[7] != 0 )contador = contador + 1;
+    					if(sumaMes[8] != 0 )contador = contador + 1;
+    					if(sumaMes[9] != 0 )contador = contador + 1;
+    					if(sumaMes[10] != 0 )contador = contador + 1;
+    					if(sumaMes[11] != 0 )contador = contador + 1;
+    					if(sumaMes[12] != 0 )contador = contador + 1;
+
             	}
     			
     			for(var z = 0; z < productos2.productos.length; z++)
@@ -1750,8 +1766,8 @@ function Combo(){
 	                    '</div>'+
 	                    '<div class="box-footer">'+
 	                    '<div class="form-group">'+
-	                    	'<p style="float:left;margin-left:50px">Total 2018: <input  type="text" name="anho2" id="anho2-'+linkNivel+'-'+linkEntidad+'-'+linkTipoPresupuesto+'-'+linkPrograma+'-'+linkSubPrograma+'-'+linkProyecto+'-'+producto+'"'+' placeholder="Total para 2018"></p>'+	
-	                    	'<p style="float:left;margin-left:50px">Total 2019: <input  type="text" name="anho3" id="anho3-'+linkNivel+'-'+linkEntidad+'-'+linkTipoPresupuesto+'-'+linkPrograma+'-'+linkSubPrograma+'-'+linkProyecto+'-'+producto+'"'+' placeholder="Total para 2019"></p>';
+	                    	'<p style="float:left;margin-left:50px">Total 2019: <input  type="text" name="anho2" id="anho2-'+linkNivel+'-'+linkEntidad+'-'+linkTipoPresupuesto+'-'+linkPrograma+'-'+linkSubPrograma+'-'+linkProyecto+'-'+producto+'"'+' placeholder="Total para 2018"></p>'+	
+	                    	'<p style="float:left;margin-left:50px">Total 2020: <input  type="text" name="anho3" id="anho3-'+linkNivel+'-'+linkEntidad+'-'+linkTipoPresupuesto+'-'+linkPrograma+'-'+linkSubPrograma+'-'+linkProyecto+'-'+producto+'"'+' placeholder="Total para 2019"></p>';
 	                    	
 	                    if(rol_jsp == 0 || rol_jsp == 1 || rol_jsp == 2){
 	                    	programacionFisicaModal+='<button type="submit" style="margin-right:50px" class="btn btn-primary" id="guardar-producto-'+linkNivel+'-'+linkEntidad+'-'+linkTipoPresupuesto+'-'+linkPrograma+'-'+linkSubPrograma+'-'+linkProyecto+'-'+producto+'" >Guardar</button><small id="fechaUltActProductoPresupuestoMeta-'+linkNivel+'-'+linkEntidad+'-'+linkTipoPresupuesto+'-'+linkPrograma+'-'+linkSubPrograma+'-'+linkProyecto+'-'+producto+'"></small>';
@@ -2333,17 +2349,17 @@ $( document ).ready(function() {
 	*/
 	
 	var periodo = $.ajax({
-		url:'/tablero/ajaxSelects2?action=getPeriodo',
+		url:'/ajaxSelects?accion=getPeriodo',
 	  	type:'get',
 	  	dataType:'json',
 	  	async:false       
 	}).responseText;
 	periodo = JSON.parse(periodo);
 	
-	var periodoActual = '2017';
+	var periodoActual = '2018';
 			
 	var version = $.ajax({
-		url:'/tablero/ajaxSelects2?action=getVersion&anho='+periodoActual,
+		url:'/ajaxSelects?accion=getVersion&anho='+periodoActual,
 	  	type:'get',
 	  	dataType:'json',
 	  	async:false       
@@ -2379,11 +2395,24 @@ $( document ).ready(function() {
 	$('#versionSeleccion').append(optionVersion);
 	
 	$("body").on("change", "#periodoSeleccion",function(event){	
-	   	
+	    
+		$("#row-body-programacionfisica").html(""); 
 		periodoSeleccionado = $("#periodoSeleccion option:selected").val();
+		
+		if ( $("#listaf3c2").length ) {
+			$("#listaf3c2").remove();
+			$('#tipoPrograma-formulario').val('');
+			$("#listaf4c2").remove();
+			$('#programa-formulario').val('');
+			$("#listaf5c2").remove();
+			$('#subPrograma-formulario').val('');
+			$("#listaf6c2").remove();
+			$('#proyecto-formulario').val('');
+			$("#listaf7c2").remove();
+		}
 	   	
 	   	var version = $.ajax({
-			url:'/tablero/ajaxSelects2?action=getVersion&anho='+periodoSeleccionado,
+			url:'/ajaxSelects?accion=getVersion&anho='+periodoSeleccionado,
 		  	type:'get',
 		  	dataType:'json',
 		  	async:false       
@@ -2406,8 +2435,6 @@ $( document ).ready(function() {
 		
 	   	var versionSeleccionado = $("#versionSeleccion option:selected").val();
 	 	var etiquetaSeleccionado = $("#etiquetaSeleccion option:selected").val();
-
-	   	renderInsLineaAccion(periodoSeleccionado, versionSeleccionado, etiquetaSeleccionado);
 	   
 	});
 	
@@ -2667,6 +2694,7 @@ $( document ).ready(function() {
 		event.stopPropagation();
 	});
 	$("body").on("click", "#crear-producto-boton",function(event){
+		$("#crear-producto-boton").attr("disabled","");
 		if(validacion==true){
 			var productoPresupuesto= new Object();
 			var accion = "insProductoPresupuesto";
@@ -2693,8 +2721,10 @@ $( document ).ready(function() {
 				    		$("#producto_id-crear-producto").html("");
 				        	$("#row-body-programacionfisica").html("");
 				        	eje1.dibujar();
+				        	$("#crear-producto-boton").attr("disabled",false);
 			        	}else{
 			        		alert("ERROR al intentar agregar este producto. Probablemente ya existe!!");
+				        	$("#crear-producto-boton").attr("disabled",false);
 			        	}
 			        },
 			        //error: function(data,status,er) {alert("error: "+data+" status: "+status+" er:"+er);}
@@ -5176,7 +5206,7 @@ $( document ).ready(function() {
 				        	}
 			        	},
 			        //error: function(data,status,er) {alert("error: "+data+" status: "+status+" er:"+er);}
-			        error: function(data,status,er) {alert("Guardado");}
+			        error: function(data,status,er) {alert("ERROR");}
 			 });
 		       event.stopPropagation();
 				 event.preventDefault();

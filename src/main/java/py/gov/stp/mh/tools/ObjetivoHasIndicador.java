@@ -18,6 +18,7 @@ public class ObjetivoHasIndicador {
 	protected String indicadorFuenteVerificacionId;
 	protected int indicadorObjetivoId;
 	protected String productoConcat;
+	protected String usuarioResponsable;
 	
 	public int getObjetivoId() {
 		return objetivoId;
@@ -91,6 +92,12 @@ public class ObjetivoHasIndicador {
 	}
 	public void setProductoConcat(String productoConcat) {
 		this.productoConcat = productoConcat;
+	}
+	public String getUsuarioResponsable() {
+		return usuarioResponsable;
+	}
+	public void setUsuarioResponsable(String usuarioResponsable) {
+		this.usuarioResponsable = usuarioResponsable;
 	}
 
 }

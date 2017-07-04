@@ -125,7 +125,7 @@ textarea { text-transform: uppercase; }
                 var derivers = $.pivotUtilities.derivers;
 
 				
-                $.getJSON("http://spr.stp.gov.py/ajaxHelper?accion=todosLosProgramasPorAnioPt&anio=2016", function(mps) {
+                $.getJSON("http://spr.stp.gov.py/ajaxHelper?accion=todosLosProgramasPorAnioPt&anio=2018", function(mps) {
                 	$("#output").pivotUI(mps, {
                         renderers: $.extend(
                             $.pivotUtilities.renderers, 

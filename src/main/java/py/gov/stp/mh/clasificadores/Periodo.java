@@ -1,43 +1,46 @@
-
 package py.gov.stp.mh.clasificadores;
-/**
-@author		DGTIC-STP
-@email      dgtic@stp.gov.py
-*/
-
 import java.sql.Date;
 
-/**
-@author          DGTIC - STP
-@email			 dgtic@stp.gov.py
-*/
-
-public class Version {
-	protected Integer nro;
-	protected Integer anho;
+public class Periodo {
+	protected int id;
+	protected String nombre;
 	protected String descripcion;
+	protected Date fechaInicio;
+	protected Date fechaFin;
 	protected Date fechaInsercion;
 	protected Date fechaActualizacion;	
     protected String usuarioResponsable;
     protected boolean borrado=false;
-		
-	public Integer getNro() {
-		return nro;
+	
+	public int getId() {
+		return id;
 	}
-	public void setNro(Integer nro) {
-		this.nro = nro;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public Integer getAnho() {
-		return anho;
+	public String getNombre() {
+		return nombre;
 	}
-	public void setAnho(Integer anho) {
-		this.anho = anho;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	public String getDescripcion() {
 		return descripcion;
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+	public Date getFechaFin() {
+		return fechaFin;
+	}
+	public void setFechaFin(Date fechaFin) {
+		this.fechaFin = fechaFin;
 	}
 	public boolean isBorrado() {
 		return borrado;

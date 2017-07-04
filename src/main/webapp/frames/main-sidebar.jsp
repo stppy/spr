@@ -38,6 +38,8 @@
 								<li class=""><a href="/pivotCadenaValor.jsp"><i class="fa fa-link" id="linkPivotCadenaValor"></i>Análisis de Cadena de Valor POI</a></li>
 								<li class=""><a href="/pivotIndicadores.jsp"><i class="fa fa-info-circle" id="linkPivotIndicadores"></i>Análisis de Indicadores POI</a></li>
 								<li class=""><a href="/pivotDestinatariosProductos.jsp"><i class="fa fa-male" id="linkPivotDestinatariosProductos"></i>Análisis de Destinatarios de Productos POI</a></li>	
+								<!--<li class=""><a href="/pivotAnalisisProductoFisico.jsp"><i class="fa fa-line-chart" id="linkpivotAnalisisProductoFisico"></i>Análisis de Metas Físicas de Productos (Hacienda)</a></li>-->								<li class=""><a href="/pivotAnalisisProductoFinanciero.jsp"><i class="fa fa-line-chart" id="linkpivotAnalisisProductoFinanciero"></i>Análisis Financiero de Producto (Hacienda)</a></li>
+								<li class=""><a href="/pivotProducto.jsp"><i class="fa fa-line-chart" id="linkpivotAnalisisProductoFinanciero"></i>Análisis de Metas Físicas de Productos (Hacienda)</a></li>
 			   				<%}%>
 			   			</ul>
 					</li>
@@ -117,8 +119,8 @@
                         
             <li class="header">MÁS INFO</li>
             	<li><a href="/documentacion.jsp"><i class="fa fa-circle-o text-red"></i> <span>Documentación</span></a></li>
-            	<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Diccionario de Datos</span></a></li>
-            	<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Preguntas Frecuentes</span></a></li>
+<!--           	<li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Diccionario de Datos</span></a></li>
+            	<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Preguntas Frecuentes</span></a></li> -->
             	<li><a href="/reporteInstitucion.jsp"><i class="fa fa-circle-o text-green"></i> <span>Imprimir Reporte POI</span></a></li>
             	<li><a href="/reporte_pnd.jsp"><i class="fa fa-circle-o text-green"></i> <span>Reporte PND</span></a></li>
             <% if (attributes.get("role_id").toString().equals("1") ){%>	

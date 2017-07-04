@@ -67,10 +67,10 @@ function modalError() {
      '                 <div class="modal-body alert-danger">'+
      '                        <div class="alert-danger">'+
      '                        <h3 class="text-center">ERROR AL GUARDAR EL REGISTRO.</h3>'+
-     '                        <h3 class="text-center">FAVOR CONTACTAR A: </h3>'+
+//     '                        <h3 class="text-center">FAVOR CONTACTAR A: </h3>'+
      '                    </div>'+
      '                </div>'+
-     '                 <div class="modal-footer">'+
+/*     '                 <div class="modal-footer">'+
      '                    <div class="box box-danger" height="1000px">'+
      '                        <div class="box-header with-border" height="1000px"  align="left">'+
      '                            <h3 class="box-title" id="tituloTipoPrograma">'+
@@ -98,7 +98,7 @@ function modalError() {
      '                            </table> '+
      '                        </div>'+
      '                    </div>'+
-     '                </div>'+
+     '                </div>'+*/
      '            </div> '+
      '        </div>'+
      '    </div>';
@@ -284,6 +284,19 @@ function cargarIndicadoresVinculados(productoConcat,objetivoRelId, relTipoObjeti
 cuerpoTablaIndicadoresVinculados += '<tr><td>'+indicadores[q].nombre+'</td><td>'+optionTipoIndicador+'</td>'+
 									'<td>'+optionUnidadesMedida+'</td><td>'+indicadores[q].frecuencia_meses+'</td><td>'+indicadores[q].fuente_verificacion_id+'</td>'+
 									'<td class="text-center">'+
+									
+/* 								    var idParsed = usuarios[0].correo.split("@");
+									var usuarioInstitucion = idParsed[1];
+								    idParsed = indicadores[q].usuarioResponsable.split("@");
+									var usuarioIndicador = idParsed[1];
+									if(usuarioInstitucion == usuarioIndicador){
+									
+									if(usuarios[0].correo == indicadores[q].usuarioResponsable){
+										cuerpoTablaIndicadoresVinculados +=	'<button type="button" class="btn btn-default btn-sm consultaEditarIndicador" data-toggle="tooltip" data-placement="top" title="Editar Indicador" parametros="'+indicadores[q].id+'-'+indicadores[q].tipo_indicador_id+'-'+indicadores[q].unidad_medida_id+'-'+indicadores[q].desagregacion_tipo_zona_geografica_id+'-'+indicadores[q].tipo_demografica_id+'-'+indicadores[q].objetivo_id+'-'+parametroRetorno+'"><span class="glyphicon glyphicon-pencil"></span></button>';
+									}else{
+										cuerpoTablaIndicadoresVinculados +=	'<button type="button" class="btn btn-default btn-sm consultaVerificarIndicador" data-toggle="tooltip" data-placement="top" title="Usted no puede modificar este Indicador"> <span class="glyphicon glyphicon-pencil"></span></button>';
+									}
+*/									
 									'<button type="button" class="btn btn-default btn-sm consultaEditarIndicador" data-toggle="tooltip" data-placement="top" title="Editar Indicador" parametros="'+indicadores[q].id+'-'+indicadores[q].tipo_indicador_id+'-'+indicadores[q].unidad_medida_id+'-'+indicadores[q].desagregacion_tipo_zona_geografica_id+'-'+indicadores[q].tipo_demografica_id+'-'+indicadores[q].objetivo_id+'-'+parametroRetorno+'"><span class="glyphicon glyphicon-pencil"></span></button>'+
 									'<button type="button" class="btn btn-default btn-sm modalMetas" data-toggle="tooltip" data-placement="top" title="Agregar Meta" parametros="'+indicadores[q].id+'-'+indicadores[q].desagregacion_tipo_zona_geografica_id+'-'+indicadores[q].tipo_demografica_id+'-'+parametroRetorno+'-Metas">'+
 										'<span class="glyphicon glyphicon-list-alt"></span>'+
@@ -291,10 +304,17 @@ cuerpoTablaIndicadoresVinculados += '<tr><td>'+indicadores[q].nombre+'</td><td>'
 									'<button type="button" class="btn btn-default btn-sm modalMetas" data-toggle="tooltip" data-placement="top" title="Agregar Avance" parametros="'+indicadores[q].id+'-'+indicadores[q].desagregacion_tipo_zona_geografica_id+'-'+indicadores[q].tipo_demografica_id+'-'+parametroRetorno+'-Avance">'+
 									'<span class="fa fa-line-chart"></span>'+
 								'</button>'+
-									'<button type="button" class="btn btn-default btn-sm consultaBorrarIndicadorVinculado" data-toggle="tooltip" data-placement="top" title="Borrar Indicador Vinculado" parametros="'+indicadores[q].id+'-'+parametroRetorno+'">'+
-										'<span class="glyphicon glyphicon-trash"></span>'+
-									'</button>'+
-									'</td></tr>';
+								'<button type="button" class="btn btn-default btn-sm consultaBorrarIndicadorVinculado" data-toggle="tooltip" data-placement="top" title="Borrar Indicador Vinculado" parametros="'+indicadores[q].id+'-'+parametroRetorno+'"><span class="glyphicon glyphicon-trash"></span></button>';
+								
+/*								if(usuarios[0].correo == indicadores[q].usuarioResponsable){
+									cuerpoTablaIndicadoresVinculados +='<button type="button" class="btn btn-default btn-sm consultaBorrarIndicadorVinculado" data-toggle="tooltip" data-placement="top" title="Borrar Indicador Vinculado" parametros="'+indicadores[q].id+'-'+parametroRetorno+'"><span class="glyphicon glyphicon-trash"></span></button>';
+								}else{
+									cuerpoTablaIndicadoresVinculados +='<button type="button" class="btn btn-default btn-sm consultaVerificarIndicador" data-toggle="tooltip" data-placement="top" title="Usted no puede borrar este Indicador" ><span class="glyphicon glyphicon-trash"></span></button>';
+								}
+*/								
+								
+cuerpoTablaIndicadoresVinculados +=	'</td></tr>';
+
 					<%} if (attributes.get("role_id").toString().equals("3")){%>
 cuerpoTablaIndicadoresVinculados += '<tr><td>'+indicadores[q].nombre+'</td>'+
 									'<td>'+optionTipoIndicador+'</td>'+
@@ -592,6 +612,12 @@ function renderIndicadores(productoConcat,objetivoRelId, relTipoObjetivoId, obje
 			$("#dataTablesIndicadores-"+productoConcat).DataTable();
 }
 
+$("body").on("click", ".consultaVerificarIndicador",function(event){
+	
+	modalError("Usted no puede modificar este Indicador. Favor comunicarse con scs@stp.gov.py",false);
+});
+
+	
 $("body").on("click", ".agregarIndicador",function(event){
 	 	var parametros = $(this).attr("parametros");
 	    var idParsed = parametros.split("-");
@@ -751,7 +777,9 @@ $("body").on("click", ".agregarIndicador",function(event){
 		
 		var optionTipoIndicador = "";
 		for(var t = 0; t < tipoIndicador.length; t++){
-			optionTipoIndicador += '<option value="'+tipoIndicador[t].id+'" >'+tipoIndicador[t].nombre+'</option>';
+			if (tipoIndicador[t].id == 2){
+				optionTipoIndicador += '<option value="'+tipoIndicador[t].id+'" >'+tipoIndicador[t].nombre+'</option>';	
+			}			
 		}																													
 																																										
 		var cuerpoModalIndicador = "";
@@ -801,7 +829,7 @@ $("body").on("click", ".agregarIndicador",function(event){
 								'												           <select class="form-control" name="" id="unidadMedidaIndicador">'+optionUnidadesMedida+'</select>'+
 								'												         </div>'+
 								'												         <div class="form-group">'+
-								'												           <label>Frecuencia de Medición</label>'+
+								'												           <label>Frecuencia de Medición (meses)</label>'+
 								'												           <input type="number" class="form-control" id="frecuenciaMedicionIndicador" value="0">'+
 								'												         </div>'+
 								'												         <div class="form-group">'+
@@ -1476,7 +1504,9 @@ $("body").on("click", ".agregarIndicador",function(event){
 			
 			var optionTipoIndicador = "";
 			for(var t = 0; t < tipoIndicador.length; t++){
-				optionTipoIndicador += '<option value="'+tipoIndicador[t].id+'" >'+tipoIndicador[t].nombre+'</option>';
+				if (tipoIndicador[t].id == 2){ 
+					optionTipoIndicador += '<option value="'+tipoIndicador[t].id+'" >'+tipoIndicador[t].nombre+'</option>';
+				}
 			}
 				
 			
@@ -1528,7 +1558,7 @@ $("body").on("click", ".agregarIndicador",function(event){
 									'												           <select class="form-control" id="unidadMedidaIndicador">'+optionUnidadesMedida+'</select>'+
 									'												         </div>'+
 									'												         <div class="form-group">'+
-									'												           <label>Frecuencia de Medición</label>'+
+									'												           <label>Frecuencia de Medición (meses)</label>'+
 									'												           <input type="number" class="form-control" value="'+indicadores[0].frecuencia_meses+'" id="frecuenciaMedicionIndicador">'+
 									'												         </div>'+
 									'												         <div class="form-group">'+
@@ -1966,7 +1996,9 @@ $("body").on("click", ".agregarIndicador",function(event){
 			$('#modalMetas').modal('show');
 			$('#vencimientoMetas').datepicker({  
 				language: "es",
-				format: 'yyyy-mm-dd'});
+				format: 'yyyy-mm-dd',
+				todayBtn: "linked",
+			    todayHighlight: true});
 		}
 		
 		$("body").on("click", ".modalMetas",function(event){
@@ -2391,7 +2423,9 @@ $("body").on("click", ".agregarIndicador",function(event){
 			$("#modalEditarMeta").modal('show');
 			$('#vencimientoMetas').datepicker({  
 				language: "es",
-				format: 'yyyy-mm-dd'});
+				format: 'yyyy-mm-dd',
+				todayBtn: "linked",
+			    todayHighlight: true});
 					
 			});
 		

@@ -31,10 +31,10 @@ $(document).ready(function(){
 	     '                 <div class="modal-body alert-danger">'+
 	     '                        <div class="alert-danger">'+
 	     '                        <h3 class="text-center">ERROR AL GUARDAR EL REGISTRO.</h3>'+
-	     '                        <h3 class="text-center">FAVOR CONTACTAR A: </h3>'+
+//	     '                        <h3 class="text-center">FAVOR CONTACTAR A: </h3>'+
 	     '                    </div>'+
 	     '                </div>'+
-	     '                 <div class="modal-footer">'+
+/*	     '                 <div class="modal-footer">'+
 	     '                    <div class="box box-danger" height="1000px">'+
 	     '                        <div class="box-header with-border" height="1000px"  align="left">'+
 	     '                            <h3 class="box-title" id="tituloTipoPrograma">'+
@@ -62,7 +62,7 @@ $(document).ready(function(){
 	     '                            </table> '+
 	     '                        </div>'+
 	     '                    </div>'+
-	     '                </div>'+
+	     '                </div>'+*/
 	     '            </div> '+
 	     '        </div>'+
 	     '    </div>';

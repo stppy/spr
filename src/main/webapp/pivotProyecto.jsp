@@ -8,15 +8,15 @@
 
 <!DOCTYPE html>
 <html>
-  <head>
-  <!--  ISO-8859-1 -->
-  <%@ include file="/frames/head.jsp" %>
-<!--   <script src="frames/entidad.js" type="text/javascript"></script> -->
-
-
-
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <title>Pivot Table - Tablero Presidencial</title>
+	<head>
+		<!--  ISO-8859-1 -->
+		<%@ include file="/frames/head.jsp" %>
+		<!--   <script src="frames/entidad.js" type="text/javascript"></script> -->
+		
+		
+		
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>Pivot Table - SPR</title>
         <link rel="stylesheet" type="text/css" href="tablero_files/pivot.css">
         <script type="text/javascript" src="tablero_files/d3.js"></script>
         <script type="text/javascript" src="tablero_files/jsapi"></script>
@@ -25,6 +25,7 @@
         <script type="text/javascript" src="tablero_files/pivot.js"></script>
         <script type="text/javascript" src="tablero_files/gchart_renderers.js"></script>
         <script type="text/javascript" src="tablero_files/d3_renderers.js"></script>
+        <script type="text/javascript" src="tablero_files/export_renderers.js"></script>
         <script type="text/javascript" src="tablero_files/jquery.js"></script>
         <style>
             * {font-family: Verdana;}
@@ -37,12 +38,11 @@
               text-indent: 2px;
             }
         </style>
-    <link type="text/css" rel="stylesheet" href="tablero_files/orgchart.css">
-    <link type="text/css" rel="stylesheet" href="tablero_files/annotatedtimeline.css">
-    <link type="text/css" rel="stylesheet" href="tablero_files/imagesparkline.css">
-    <link type="text/css" rel="stylesheet" href="tablero_files/tooltip.css">
-    <script src="jquery-1.11.2.min" type="text/javascript"></script>
-</head>
+	    <link type="text/css" rel="stylesheet" href="tablero_files/orgchart.css">
+	    <link type="text/css" rel="stylesheet" href="tablero_files/annotatedtimeline.css">
+	    <link type="text/css" rel="stylesheet" href="tablero_files/imagesparkline.css">
+	    <link type="text/css" rel="stylesheet" href="tablero_files/tooltip.css">    
+	</head>
 <body class="skin-blue sidebar-mini">
 <% AttributePrincipal user = (AttributePrincipal) request.getUserPrincipal();%>
 <% Map attributes = user.getAttributes(); 
@@ -103,12 +103,26 @@ textarea { text-transform: uppercase; }
 	          <div class="box" height="1000px">
 	            <div class="box-header with-border" height="1000px">
 	              <h3 class="box-title" id="tituloTipoPrograma">
-	                Entidades en Hacienda
+	                Pivot Proyecto (Hacienda)
 	              </h3> 
 	              <div class="box-tools pull-right" height="1000px"><button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 	              </div>
 	            </div>
-	            <div class="box-body" >
+	            <div class="box-body" style="overflow: auto; display: block;">
+	            
+	            	     	<div class="container">
+								<div class="row">
+									<div class="row">
+										<div class="col-md-6">
+										<h5>Seleccione el año y versión para generar pivot.</h5>
+										</div>										
+										<div class="col-md-6">						
+												<button type="button" class="btn btn-box btn-primary" id="generarPivot"><p align="center">Generar Pivot</p></button>											 
+										</div>										
+									</div>
+								</div><!-- fin row de selectores -->
+							</div><!-- fin container de selectores -->
+	            
 	            
 	          <table class="table table-striped table-bordered table-hover">
 	            	<tr>	  					
@@ -119,31 +133,130 @@ textarea { text-transform: uppercase; }
 		<script src="tablero_files/formatendefaultenuientableenorgchartenmotionchartengaugeenann.js" type="text/javascript"></script>
 		<script type="text/javascript">
 		$( document ).ready(function() {
-            google.load("visualization", "1", {packages:["corechart", "charteditor"]});
-            $(function(){
-            	$.noConflict();
-                var derivers = $.pivotUtilities.derivers;
-
+            
+			$("#output").html("");
+			inicializar=true;
+			
+			$("body").on("click", "#generarPivot",function(event){
+				$("#output").html("");
+				var periodoSeleccionado = $("#periodoSeleccion option:selected").val();
+				var versionSeleccionado = $("#versionSeleccion option:selected").val();
 				
-                $.getJSON("http://spr.stp.gov.py/ajaxHelper?accion=todosLosProyectosPorAnioPt&anio=2016", function(mps) {
-                	$("#output").pivotUI(mps, {
-                        renderers: $.extend(
-                            $.pivotUtilities.renderers, 
-                            $.pivotUtilities.gchart_renderers, 
-                            $.pivotUtilities.d3_renderers
-                            )/*,
-                        derivedAttributes: {
-                            "Age Bin": derivers.bin("Age", 10),
-                            "Gender Imbalance": function(mp) {
-                                return mp["Gender"] == "Male" ? 1 : -1;
-                            }
-                        },
-                        cols: ["Age Bin"], rows: ["Gender"],
-                        rendererName: "Area Chart"
-						*/
-                    });
-                });
-             });
+				iniciarPivot(periodoSeleccionado,versionSeleccionado, inicializar);				
+			});
+						
+			var periodo = $.ajax({
+				url:'/ajaxSelects?accion=getPeriodo',
+			  	type:'get',
+			  	dataType:'json',
+			  	async:false       
+			}).responseText;
+			periodo = JSON.parse(periodo);
+			
+			var periodoActual = 2018;
+					
+			var version = $.ajax({
+				url:'/ajaxSelects?accion=getVersion&anho='+periodoActual,
+			  	type:'get',
+			  	dataType:'json',
+			  	async:false       
+			}).responseText;
+			version = JSON.parse(version);
+			
+			var optionPeriodo;
+			var optionVersion;
+
+			for(p = 0;p<periodo.length; p++)
+			{
+				if(periodo[p].id >= 2014){
+					if(periodo[p].id == periodoActual)
+					{
+						optionPeriodo+='<option value="'+periodo[p].id+'" selected>'+periodo[p].nombre+'</option>';
+					}else{
+						optionPeriodo+='<option value="'+periodo[p].id+'" >'+periodo[p].nombre+'</option>';
+					}
+				}
+			}	
+			
+			for(v = 0;v<version.length; v++)
+			{
+				if(version[v].id == 50)
+				{
+					optionVersion+='<option value="'+version[v].nro+'" selected>'+version[v].nro+'</option>';
+				}else{
+					optionVersion+='<option value="'+version[v].nro+'" >'+version[v].nro+'</option>';
+				}					
+			}
+			
+			$('#periodoSeleccion').append(optionPeriodo);
+			$('#versionSeleccion').append(optionVersion);
+			
+			$("body").on("change", "#periodoSeleccion",function(event){	
+			    
+				$("#row-body-programacionfisica").html(""); 
+				periodoSeleccionado = $("#periodoSeleccion option:selected").val();
+							   	
+			   	var version = $.ajax({
+					url:'/ajaxSelects?accion=getVersion&anho='+periodoSeleccionado,
+				  	type:'get',
+				  	dataType:'json',
+				  	async:false       
+				}).responseText;
+				version = JSON.parse(version);
+			   	
+				var optionVersion = "";
+				if (version.length > 0) {
+					for(v = 0;v<version.length; v++)
+					{
+						if(version[v].id == 50)
+						{
+							optionVersion+='<option value="'+version[v].nro+'" selected>'+version[v].nro+'</option>';
+						}else{
+							optionVersion+='<option value="'+version[v].nro+'" >'+version[v].nro+'</option>';
+						}					
+					}
+				}
+				$('#versionSeleccion').html(optionVersion);			 	
+			});
+			
+			var derivers; var renderers;
+			function iniciarPivot(periodo, version, inicio){
+				// "inicializar" es una variable booleana para inicializar "derivers" solo al cargar la página
+			
+				google.load("visualization", "1", {packages:["corechart", "charteditor"]});
+	            $(function(){
+	            	
+	            	if (inicio==true){
+	            		$.noConflict();
+		                 derivers = $.pivotUtilities.derivers;
+		                 renderers = $.extend($.pivotUtilities.renderers, 
+			                        $.pivotUtilities.export_renderers);
+		                 inicializar=false;
+	            	}	
+					
+	                $.getJSON("http://spr.stp.gov.py/ajaxHelper?accion=todosLosProyectosPorAnioPt&anio="+periodo+"&version="+version, function(mps) {
+	                	$("#output").pivotUI(mps, {
+	                        renderers: $.extend(
+	                            $.pivotUtilities.renderers, 
+	                            $.pivotUtilities.gchart_renderers, 
+	                            $.pivotUtilities.d3_renderers
+	                            ),
+	                            rendererName: "TSV Export"/*,
+	                        derivedAttributes: {
+	                            "Age Bin": derivers.bin("Age", 10),
+	                            "Gender Imbalance": function(mp) {
+	                                return mp["Gender"] == "Male" ? 1 : -1;
+	                            }
+	                        },
+	                        cols: ["Age Bin"], rows: ["Gender"],
+	                        rendererName: "Area Chart"
+							*/
+	                    });
+	                });
+	             });
+			}
+			
+			
 		});
         </script>
 
@@ -249,7 +362,7 @@ textarea { text-transform: uppercase; }
 
       <!-- Control Sidebar -->
       <aside class="control-sidebar control-sidebar-light">
-		<!-- include file="/frames/control-sidebar.jsp"  -->
+		<%@ include file="/frames/control-sidebar.jsp"%>
       </aside><!-- /.control-sidebar -->
       <!-- Add the sidebar's background. This div must be placed
            immediately after the control sidebar -->

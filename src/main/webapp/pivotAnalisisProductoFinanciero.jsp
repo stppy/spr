@@ -8,15 +8,15 @@
 
 <!DOCTYPE html>
 <html>
-  <head>
-  <!--  ISO-8859-1 -->
-  <%@ include file="/frames/head.jsp" %>
-<!--   <script src="frames/entidad.js" type="text/javascript"></script> -->
+	<head>
+	  	<!--  ISO-8859-1 -->
+	  	<%@ include file="/frames/head.jsp" %>
+		<!--   <script src="frames/entidad.js" type="text/javascript"></script> -->
 
 
 
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <title>Pivot Table - Tablero Presidencial</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>Pivot Table - SPR</title>
         <link rel="stylesheet" type="text/css" href="tablero_files/pivot.css">
         <script type="text/javascript" src="tablero_files/d3.js"></script>
         <script type="text/javascript" src="tablero_files/jsapi"></script>
@@ -25,6 +25,7 @@
         <script type="text/javascript" src="tablero_files/pivot.js"></script>
         <script type="text/javascript" src="tablero_files/gchart_renderers.js"></script>
         <script type="text/javascript" src="tablero_files/d3_renderers.js"></script>
+        <script type="text/javascript" src="tablero_files/export_renderers.js"></script>
         <script type="text/javascript" src="tablero_files/jquery.js"></script>
         <style>
             * {font-family: Verdana;}
@@ -37,18 +38,17 @@
               text-indent: 2px;
             }
         </style>
-    <link type="text/css" rel="stylesheet" href="tablero_files/orgchart.css">
-    <link type="text/css" rel="stylesheet" href="tablero_files/annotatedtimeline.css">
-    <link type="text/css" rel="stylesheet" href="tablero_files/imagesparkline.css">
-    <link type="text/css" rel="stylesheet" href="tablero_files/tooltip.css">
-    <script src="jquery-1.11.2.min" type="text/javascript"></script>
-</head>
+	    <link type="text/css" rel="stylesheet" href="tablero_files/orgchart.css">
+	    <link type="text/css" rel="stylesheet" href="tablero_files/annotatedtimeline.css">
+	    <link type="text/css" rel="stylesheet" href="tablero_files/imagesparkline.css">
+	    <link type="text/css" rel="stylesheet" href="tablero_files/tooltip.css">
+	</head>
 <body class="skin-blue sidebar-mini">
 <% AttributePrincipal user = (AttributePrincipal) request.getUserPrincipal();%>
 <% Map attributes = user.getAttributes(); 
 if (user != null) { %>
 	<%@ include file="/frames/perfil.jsp" %>
-		
+
   <!-- piwik -->
   <script type="text/javascript">
   var _paq = _paq || [];
@@ -103,25 +103,35 @@ textarea { text-transform: uppercase; }
 	          <div class="box" height="1000px">
 	            <div class="box-header with-border" height="1000px">
 	              <h3 class="box-title" id="tituloTipoPrograma">
-	                Entidades en Hacienda
+	              Análisis Financiero de Producto (Hacienda)
 	              </h3> 
 	              <div class="box-tools pull-right" height="1000px"><button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 	              </div>
 	            </div>
-	            <div class="box-body" >
+	            <div class="box-body" style="overflow: auto; display: block;">
 	            
-	            <div class="container">
+	            	            <div class="container">
 								<div class="row">
 									<div class="row">
-										<div class="col-md-6">
-										<h5>Seleccione el año para generar pivot.</h5>
+										<div class="col-md-3">
+											<select class="form-control" id="selectorDeNivel">
+												<option value='0' selected>Nivel</option>
+											</select> 
+										</div>
+										<div class="col-md-3">
+											<select class="form-control" id="selectorDeEntidad">
+												<option value='0-0' selected>Entidad</option>
+											</select> 
 										</div>										
-										<div class="col-md-6">						
-												<button type="button" class="btn btn-box btn-primary" id="generarPivot"><p align="center">Generar Pivot</p></button>											 
+										<div class="col-md-3">
+											<div class="col-md-3">
+												<button type="button" class="btn btn-box btn-primary" id="generarPivot"><p align="center">Generar Pivot</p></button>
+											</div> 
 										</div>										
 									</div>
 								</div><!-- fin row de selectores -->
 							</div><!-- fin container de selectores -->
+	            
 	            
 	          <table class="table table-striped table-bordered table-hover">
 	            	<tr>	  					
@@ -136,12 +146,191 @@ textarea { text-transform: uppercase; }
 			$("#output").html("");
 			inicializar=true;
 			
+			function modalError(mensaje, exito) {
+				var exito_error="";
+				if(exito==true){
+					exito_error="modal-body alert-success";
+				}else{
+					if(exito==false){
+						exito_error="modal-body alert-danger";
+					}
+				}
+				var ModalError = '    <div id="modalMensajeError" class="modal fade">'+
+			    '        <div class="modal-dialog">'+
+			 '            <div class="modal-content">'+
+			 '                 <div class="'+exito_error+'">'+                         
+			 '                        <h3 class="text-center">'+mensaje+'</h3>'+ 
+			 '                </div>'+ 
+			 '            </div> '+
+			 '        </div>'+
+			 '    </div>';
+			$("body").append(ModalError);
+			$('#modalMensajeError').on('show.bs.modal', function (){
+			    var myModal = $(this);
+			    clearTimeout(myModal.data('hideInterval'));
+			    myModal.data('hideInterval', setTimeout(function(){
+			        myModal.modal('hide');
+			    }, 1800));
+			})
+			//}).modal('show')
+			
+			$('#modalMensajeError').modal('show');
+			}
+			
 			$("body").on("click", "#generarPivot",function(event){
 				$("#output").html("");
-				var periodoSeleccionado = $("#periodoSeleccion option:selected").val();				
+				var periodoSeleccionado = $("#periodoSeleccion option:selected").val();
+				var versionSeleccionado = $("#versionSeleccion option:selected").val();
+				var productoConcat = $("#selectorDeEntidad option:selected").val();
+				productoConcat=productoConcat.split("-");				
+				var nivel = productoConcat[0];
+				var entidad = productoConcat[1];				
 				
-				iniciarPivot(periodoSeleccionado,null, inicializar);				
+				if(productoConcat=="" || productoConcat == undefined || entidad == undefined || entidad==0){
+					alert("Debe ingresar todos los datos de la estructura y el año");
+					//modalError("Debe ingresar los datos de nivel, entidad, año y versión",false);					
+				}else{					
+					iniciarPivot(periodoSeleccionado,versionSeleccionado,inicializar, nivel, entidad);	
+				}
+								
 			});
+			
+			/**********selector de niveles***********/
+			var datosNiveles = $.ajax({
+				url:'/ajaxSelects?accion=getNiveles'+'&borrado=false',
+				type:'get',
+				dataType:'json',
+				async:false       
+			}).responseText;
+			datosNiveles = JSON.parse(datosNiveles);
+			datosNiveles = datosNiveles.niveles;
+
+			var optionPNDnivel="<option value='0' selected>Nivel</option>";
+
+			for(var a = 0; a < datosNiveles.length; a++){
+				if (datosNiveles[a].nivel != 1){
+					optionPNDnivel+='<option value="'+datosNiveles[a].nivel+'" >'+datosNiveles[a].nivel+' - '+datosNiveles[a].nombreNivel+'</option>';
+				}
+			}
+			$("#selectorDeNivel").html(optionPNDnivel);
+			
+			//-------------change de nivel-------------//
+			$("body").on("change", "#selectorDeNivel",function(event){
+				var parametros = $("#selectorDeNivel option:selected").val();
+			    var idParsed = parametros.split("-"); 
+			    nivel = idParsed[0];
+			    var optionPNDentidad="";
+			    
+			    //limpieza de los selectores dependientes, variables y la matriz
+			    $("#selectorDeEntidad").html("<option value='' selected >Entidad</option>");
+			    $("#selectorDeTipoPresupuesto").html("<option value='' selected >Tipo de Programa</option>");	    		    	
+		    	$("#selectorDePrograma").html("<option value='' selected>Programa</option>");
+		    	$("#selectorDeSubPrograma").html("<option value='' selected>Sub Programa</option>");
+		      	$("#selectorDeProyecto").html("<option value='' selected >Proyecto</option>");
+		    	$("#selectorDeProducto").html("<option value='' selected >Producto</option>");    	
+		    	entidad=0; tipoPrograma=0; programa=0; subprograma=0; proyecto=-1; producto=0;
+		    	vaciarMatriz();
+			    
+			    if (parametros != "0"){
+				
+				    /**********selector de entidades***********/
+					var pndNivelEntidad = $.ajax({
+						url:'/ajaxSelects?accion=getPNDne&nivel='+nivel, //no requiere parametro de borrado pues la vista ya filtra los borrados.
+					  	type:'get',
+					  	dataType:'json',
+					  	async:false       
+					}).responseText;
+					pndNivelEntidad = JSON.parse(pndNivelEntidad);
+					
+					if (pndNivelEntidad != null){
+						var optionPNDentidad="<option value='0-0' selected >Entidad</option>";
+						for(var e = 0; e < pndNivelEntidad.length; e++){
+							optionPNDentidad+='<option value="'+pndNivelEntidad[e].nivel_id+'-'+pndNivelEntidad[e].id+'" >'+pndNivelEntidad[e].id+' - '+pndNivelEntidad[e].nombre+'</option>';
+						}
+						$("#selectorDeEntidad").html(optionPNDentidad);
+					}else{
+						var optionPNDentidad="<option value=''>No posee entidades</option>";
+						$("#selectorDeEntidad").html(optionPNDentidad);
+					}
+			    } else {	    	
+			    	//Obtiene los totales a nivel pais si se deselecciona un nivel.
+			    	nivel=0;
+			    	
+			    	
+					vaciarMatriz();
+			    }
+					    
+			});
+						
+			//-------------change de entidad-------------//
+			$("body").on("change", "#selectorDeEntidad",function(event){
+				var parametros = $("#selectorDeEntidad option:selected").val();
+			    var idParsed = parametros.split("-"); 
+			    nivel = idParsed[0];
+			    entidad = idParsed[1];
+			    var optionPNDtipoPrograma = "";
+			    
+			    //limpieza de los selectores dependientes y la matriz
+			    $("#selectorDeTipoPresupuesto").html("<option value='' selected >Tipo de Programa</option>");	    		    	
+		    	$("#selectorDePrograma").html("<option value='' selected>Programa</option>");
+		    	$("#selectorDeSubPrograma").html("<option value='' selected>Sub Programa</option>");
+		      	$("#selectorDeProyecto").html("<option value='' selected >Proyecto</option>");
+		    	$("#selectorDeProducto").html("<option value='' selected >Producto</option>");
+		    	tipoPrograma=0; programa=0; subprograma=0; proyecto=-1; producto=0; 
+			    
+			    if (parametros != "0-0"){
+			    	
+					
+					//falta actualizar el modal
+					vaciarMatriz();		
+				
+					/**********selector de tipo programa***********/
+				    var tiposPrograma = $.ajax({
+				    	url:'/ajaxSelects?accion=getTiposPrograma'+'&borrado=false',
+				    	type:'get',
+				    	dataType:'json',
+				    	async:false       
+				    }).responseText;
+				    tiposPrograma = JSON.parse(tiposPrograma);
+				    tiposPrograma = tiposPrograma.tiposPrograma;
+				    
+				    if (tiposPrograma != null){
+				    	var optionPNDtipoPrograma='<option value="'+nivel+'-'+entidad+'" selected >Tipo de Programa</option>';
+				    	for(var o = 0; o < tiposPrograma.length; o++){
+				    		optionPNDtipoPrograma+='<option value="'+nivel+'-'+entidad+'-'+tiposPrograma[o].numeroFila+'" >'+tiposPrograma[o].numeroFila+' - '+tiposPrograma[o].nombreTipoPrograma+'</option>';
+				    	}
+				    	$("#selectorDeTipoPresupuesto").html(optionPNDtipoPrograma);
+				    }else{
+				    	var optionPNDtipoPrograma="<option value=''>No existe tipo</option>";
+				    	$("#selectorDeTipoPresupuesto").html(optionPNDtipoPrograma);
+				    }
+				} else {	    		    		    		    	
+					entidad=0;
+						    	
+			    	
+					vaciarMatriz();
+			    }
+			});
+			
+			var nb = 5; 
+		    var f = new Array(4); // crea una matriz de longitud 4
+		    function vaciarMatriz(){
+			    //var nb = 5; 
+			    //var f = new Array(4); // crea una matriz de longitud 4
+			    for (var i = 0; i < 4; i++) {
+			       f[i] = new Array(nb); // define cada elemento como una matriz de longitud 5
+			       for (var j = 0; j < nb; j++) {
+			          f[i][j] = "99"; // asigna a cada elemento de la matriz bidimensional los valores de i y j
+			       }
+			    }
+		    }
+		    
+		    for (var i = 0; i < 4; i++) {
+			       f[i] = new Array(nb); // define cada elemento como una matriz de longitud 5
+			       for (var j = 0; j < nb; j++) {
+			          f[i][j] = "99"; // asigna a cada elemento de la matriz bidimensional los valores de i y j
+			       }
+			 }
 			
 			var periodo = $.ajax({
 				url:'/ajaxSelects?accion=getPeriodo',
@@ -151,6 +340,19 @@ textarea { text-transform: uppercase; }
 			}).responseText;
 			periodo = JSON.parse(periodo);
 			
+			var periodoActual = 2018;
+					
+			var version = $.ajax({
+				url:'/ajaxSelects?accion=getVersion&anho='+periodoActual,
+			  	type:'get',
+			  	dataType:'json',
+			  	async:false       
+			}).responseText;
+			version = JSON.parse(version);
+			
+			var optionPeriodo;
+			var optionVersion;
+
 			for(p = 0;p<periodo.length; p++)
 			{
 				if(periodo[p].id >= 2014){
@@ -163,11 +365,54 @@ textarea { text-transform: uppercase; }
 				}
 			}	
 			
+			for(v = 0;v<version.length; v++)
+			{
+				if(version[v].id == 50)
+				{
+					optionVersion+='<option value="'+version[v].nro+'" selected>'+version[v].nro+'</option>';
+				}else{
+					optionVersion+='<option value="'+version[v].nro+'" >'+version[v].nro+'</option>';
+				}					
+			}
+			
 			$('#periodoSeleccion').append(optionPeriodo);
+			$('#versionSeleccion').append(optionVersion);
+			
+			$("body").on("change", "#periodoSeleccion",function(event){	
+			    
+				$("#row-body-programacionfisica").html(""); 
+				periodoSeleccionado = $("#periodoSeleccion option:selected").val();
+							   	
+			   	var version = $.ajax({
+					url:'/ajaxSelects?accion=getVersion&anho='+periodoSeleccionado,
+				  	type:'get',
+				  	dataType:'json',
+				  	async:false       
+				}).responseText;
+				version = JSON.parse(version);
+			   	
+				var optionVersion = "";
+				if (version.length > 0) {
+					for(v = 0;v<version.length; v++)
+					{
+						if(version[v].id == 50)
+						{
+							optionVersion+='<option value="'+version[v].nro+'" selected>'+version[v].nro+'</option>';
+						}else{
+							optionVersion+='<option value="'+version[v].nro+'" >'+version[v].nro+'</option>';
+						}					
+					}
+				}
+				$('#versionSeleccion').html(optionVersion);
+				
+			   	var versionSeleccionado = $("#versionSeleccion option:selected").val();			 	
+			});
 			
 			var derivers; var renderers;
-			function iniciarPivot(periodo, version, inicio){
-				google.load("visualization", "1", {packages:["corechart", "charteditor"]});
+			function iniciarPivot(periodo, version, inicio, nivel, entidad){
+				// "inicializar" es una variable booleana para inicializar "derivers" solo al cargar la página
+								
+	            google.load("visualization", "1", {packages:["corechart", "charteditor"]});
 	            $(function(){
 	            	
 	            	if (inicio==true){
@@ -177,14 +422,15 @@ textarea { text-transform: uppercase; }
 			                        $.pivotUtilities.export_renderers);
 		                 inicializar=false;
 	            	}
-					
-	                $.getJSON("http://spr.stp.gov.py/ajaxHelper?accion=todosLosSubprogramasPorAnioPt&anio="+periodo, function(mps) {
+	            	
+	                $.getJSON("/ajaxSelects?accion=getAsignacionPresiVersion&anho="+periodo+"&nivel="+nivel+"&entidad="+entidad+"&versionReporte="+version, function(mps) {
 	                	$("#output").pivotUI(mps, {
 	                        renderers: $.extend(
 	                            $.pivotUtilities.renderers, 
 	                            $.pivotUtilities.gchart_renderers, 
 	                            $.pivotUtilities.d3_renderers
-	                            )/*,
+	                            ),
+	                            rendererName: "TSV Export"/*,
 	                        derivedAttributes: {
 	                            "Age Bin": derivers.bin("Age", 10),
 	                            "Gender Imbalance": function(mp) {
@@ -198,6 +444,8 @@ textarea { text-transform: uppercase; }
 	                });
 	             });
 			}
+
+
 		});
         </script>
 
@@ -299,17 +547,15 @@ textarea { text-transform: uppercase; }
           <b>Version</b> 2.0
         </div>
         <strong>Copyright &copy; 2015 <a href="http://www.stp.gov.py">STP</a>.</strong> All rights reserved.
-      </footer> 
-
-      <!-- Control Sidebar -->
-      <aside class="control-sidebar control-sidebar-light">
-		<!-- include file="/frames/control-sidebar.jsp"  -->
-      </aside><!-- /.control-sidebar -->
-      <!-- Add the sidebar's background. This div must be placed
+      </footer>
+		<!-- Control Sidebar -->
+		<aside class="control-sidebar control-sidebar-light">
+			<%@ include file="/frames/control-sidebar.jsp"%>
+		</aside><!-- /.control-sidebar -->
+		<!-- Add the sidebar's background. This div must be placed
            immediately after the control sidebar -->
-      <div class='control-sidebar-bg'></div>
-
-    </div><!-- ./wrapper -->
+		<div class='control-sidebar-bg'></div>
+	</div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.3 -->
     <script src="plugins/jQuery/jQuery-2.1.3.min.js"></script>

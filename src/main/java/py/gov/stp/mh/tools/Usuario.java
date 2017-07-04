@@ -23,6 +23,7 @@ public class Usuario {
 	protected int rolTablero;
 	protected int rolMovil;
 	protected boolean correoReal;
+	protected int ultimaEtiquetaId;
 	
 	public boolean isBorrado() {
 		return borrado;
@@ -124,4 +125,11 @@ public class Usuario {
 	public void setCorreoReal(boolean correoReal) {
 		this.correoReal = correoReal;
 	}
+	public int getUltimaEtiquetaId() {
+		return ultimaEtiquetaId;
+	}
+	public void setUltimaEtiquetaId(int ultimaEtiquetaId) {
+		this.ultimaEtiquetaId = ultimaEtiquetaId;
+	}
+	
 }

@@ -4327,4 +4327,29 @@ public class SqlUpdates {
 			return false;
 		}
 	}
+	public static boolean actUltimaEtiqueta(Usuario objeto) {
+		try {
+			Connection conect = ConnectionConfiguration.conectar();
+
+			String query = "update usuario set ultima_etiqueta_id= ? where correo = ? ";
+			PreparedStatement update = null;
+			
+			int cantCampos = 0;
+			update = conect.prepareStatement(query);
+
+			cantCampos++;
+			update.setInt(cantCampos, objeto.getUltimaEtiquetaId());
+						
+			cantCampos++;
+			update.setString(cantCampos, objeto.getCorreo());
+
+			update.execute();
+			conect.close();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+	}
 }

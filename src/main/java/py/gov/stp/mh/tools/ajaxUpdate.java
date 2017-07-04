@@ -884,6 +884,21 @@ public class ajaxUpdate extends HttpServlet {
 				}
         		
         	}
+        	if (accion.equals("actUltEtiqueta")){
+        		Usuario usr = new Usuario();
+        		BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+                String json = "";
+                if(br != null){ json = br.readLine();}
+                Gson gsonInsert = new Gson();
+                usr=gsonInsert.fromJson(json, Usuario.class);
+                try {
+	                boolean status = SqlUpdates.actUltimaEtiqueta(usr);
+	        		myObj.addProperty("success", status);
+	        		out.println(myObj.toString());
+                } catch (Exception e) {
+					e.printStackTrace();
+				}
+        	}
         }
      
     }

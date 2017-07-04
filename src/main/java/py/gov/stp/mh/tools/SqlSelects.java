@@ -178,6 +178,7 @@ public class SqlSelects {
    				objeto.setRolTablero(rs.getInt("role_id_tablero"));
    				objeto.setRolMovil(rs.getInt("role_id_movil"));
    				objeto.setCorreoReal(rs.getBoolean("email_real"));
+   				objeto.setUltimaEtiquetaId(rs.getInt("ultima_etiqueta_id"));
    				 				
    				objetos.add(objeto);
    			}
@@ -1071,6 +1072,7 @@ public class SqlSelects {
 				if(rs.getString("contacto") != null) objeto.setContacto(rs.getString("contacto"));
 				objeto.setNivel(rs.getInt("nivel"));
 				objeto.setEntidad(rs.getInt("entidad"));
+				objeto.setUsuarioResponsable(rs.getString("usuario_responsable"));
 				
 				objetos.add(objeto);
 			}
@@ -1405,7 +1407,7 @@ public class SqlSelects {
 		return objetos;
    }
     public static List<py.gov.stp.mh.clasificadores.Entidad> selectAllEntidades(String condition) throws SQLException{
-    	 Connection conect=ConnectionConfiguration.conectar();String query = " select * from entidad "+condition;
+    	 Connection conect=ConnectionConfiguration.conectar();String query = " select * from entidad "+condition+" and borrado=false";
 		 Statement statement = null; ResultSet rs=null;
 		 List<py.gov.stp.mh.clasificadores.Entidad> objetos = new ArrayList<py.gov.stp.mh.clasificadores.Entidad>();
 		 
@@ -3858,6 +3860,7 @@ public class SqlSelects {
 								objeto.setIndicadorFuenteVerificacionId(rs.getString("indicador_fuente_verificacion_id"));
 								objeto.setIndicadorObjetivoId(rs.getInt("indicador_objetivo_id"));
 								objeto.setProductoConcat(rs.getString("producto_concat"));
+								objeto.setUsuarioResponsable(rs.getString("usuario_responsable"));
 
 								objetos.add(objeto);
 							}
@@ -4496,7 +4499,7 @@ public class SqlSelects {
 
 		String query = " select array_to_json(" + "		array_agg(row_to_json(t))"
 				+ "	) as cadena_valor" + "	from("
-				+ "			select * FROM pivot_cadena_valor" + condition
+				+ "			select * FROM pnd_resul_ent_prod_presupuesto" + condition
 				+ "		)t";
 
 		Statement statement = null;
@@ -4763,4 +4766,94 @@ public class SqlSelects {
 		}
 		return objetos;
 	}
+	public static List<Periodo> selectPeriodo(String condition) throws SQLException{
+		Connection conect=ConnectionConfiguration.conectarTablero();
+		String query = " select * from periodo "+condition;
+
+		Statement statement = null;
+		ResultSet rs=null;
+		List<Periodo> objetos = new ArrayList<Periodo>();
+
+		try {
+			statement = conect.createStatement();
+			rs=statement.executeQuery(query);
+			while(rs.next()){
+				Periodo objeto = new Periodo();
+		
+				objeto.setId(rs.getInt("id"));
+				objeto.setNombre(rs.getString("nombre"));
+				objeto.setDescripcion(rs.getString("descripcion"));
+				objeto.setFechaInicio(rs.getDate("fecha_inicio"));
+				objeto.setFechaFin(rs.getDate("fecha_fin"));
+				objeto.setBorrado(rs.getBoolean("borrado"));
+
+				objetos.add(objeto);
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		finally{
+			if (statement != null) {statement.close();}
+			if (conect != null) {conect.close();}
+		}
+		return objetos;
+		}
+	public static List<Version> selectVersion(String condition) throws SQLException{
+		Connection conect=ConnectionConfiguration.conectar();
+		String query = " select * from version "+condition + " order by nro desc ";
+
+		Statement statement = null;
+		ResultSet rs=null;
+		List<Version> objetos = new ArrayList<Version>();
+
+		try {
+			statement = conect.createStatement();
+			rs=statement.executeQuery(query);
+			while(rs.next()){
+				Version objeto = new Version();
+		
+				objeto.setNro(rs.getInt("nro"));
+				objeto.setAnho(rs.getInt("anho"));
+				objeto.setDescripcion(rs.getString("descripcion"));
+				objeto.setBorrado(rs.getBoolean("borrado"));
+				
+				objetos.add(objeto);
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		finally{
+			if (statement != null) {statement.close();}
+			if (conect != null) {conect.close();}
+		}
+		return objetos; 
+		}
+	
+	public static List<EstadoMensaje> selectEstadoPeticion(String condition) throws SQLException{
+		Connection conect=ConnectionConfiguration.conectar();
+		
+		String query =    " SELECT * FROM estado_peticion "+condition+ " ORDER BY id";
+
+		Statement statement = null;
+		ResultSet rs=null;
+		List<EstadoMensaje> objetos = new ArrayList<EstadoMensaje>();
+
+		try {
+			statement = conect.createStatement();
+			rs=statement.executeQuery(query);
+			while(rs.next()){
+				EstadoMensaje objeto = new EstadoMensaje();
+		
+				objeto.setId(rs.getInt("id"));
+				objeto.setTipoMensaje(rs.getString("tipo_mensaje"));
+				
+				
+				objetos.add(objeto);
+			}
+		}
+		catch (SQLException e) {e.printStackTrace();}
+		finally{
+				if (statement != null) {statement.close();}
+				if (conect != null) {conect.close();}
+			}
+		return objetos; 
+		}
 }

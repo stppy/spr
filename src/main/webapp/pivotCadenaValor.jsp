@@ -123,7 +123,8 @@ textarea { text-transform: uppercase; }
             $(function(){
             	$.noConflict();
                 var derivers = $.pivotUtilities.derivers;
-
+                var renderers = $.extend($.pivotUtilities.renderers, 
+                        $.pivotUtilities.export_renderers);
 				
                 $.getJSON("/ajaxSelects?accion=getPivotCadenaValor", function(mps) {
                 	$("#output").pivotUI(mps, {
@@ -131,7 +132,8 @@ textarea { text-transform: uppercase; }
                             $.pivotUtilities.renderers, 
                             $.pivotUtilities.gchart_renderers, 
                             $.pivotUtilities.d3_renderers
-                            )/*,
+                            ),
+                            rendererName: "TSV Export"/*,
                         derivedAttributes: {
                             "Age Bin": derivers.bin("Age", 10),
                             "Gender Imbalance": function(mp) {

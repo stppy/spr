@@ -13,7 +13,7 @@
 		<!--   <script src="frames/entidad.js" type="text/javascript"></script> -->
 		<script src="plugins/iCheck/icheck.js" type="text/javascript"></script>
 		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-		<link href="bootstrap/css/bootstrapslider.css" rel="stylesheet">
+		<link href="bootstrap/css/bootstrapslider.css" rel="stylesheet">		
 	</head>
 	
 	<body class="skin-blue sidebar-mini">
@@ -42,7 +42,8 @@
 		<!-- /piwik -->
 	
 		<style>
-		textarea { text-transform: uppercase; }
+		textarea { text-transform: uppercase; }		 		
+
 		</style>
 	
 	    <div class="wrapper">
@@ -167,7 +168,7 @@
 										<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 									</div>
 								</div>
-								<div class="box-body" id="reporteCuerpo">
+								<div class="box-body" id="reporteCuerpo" style="font-size: 12px;">
 								</div>
 								<div class="col-xs-12" id="anexos" style="display: none;">
 									<%@include file="frames/pndReporte.jsp" %>

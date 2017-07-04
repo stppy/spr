@@ -1307,7 +1307,9 @@ $("body").on("click", ".agregarIndicador",function(event){
 		$('#modalMetas').modal('show');
 		$('#vencimientoMetas').datepicker({  
 			language: "es",
-			format: 'yyyy-mm-dd'});
+			format: 'yyyy-mm-dd',
+			todayBtn: "linked",
+		    todayHighlight: true});
 		
 	});
 	
@@ -1576,7 +1578,9 @@ $("body").on("click", ".agregarIndicador",function(event){
 		$("#modalEditarMeta").modal('show');
 		$('#vencimientoMetas').datepicker({  
 			language: "es",
-			format: 'yyyy-mm-dd'});
+			format: 'yyyy-mm-dd',
+			todayBtn: "linked",
+		    todayHighlight: true});
 				
 		});
 	

@@ -12,7 +12,8 @@ function compareDepartamento(a,b) {
 }
 
 function numeroConComa(x) {
-    return x.toString().replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    //return x.toString().replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return x.toString().replace(".00","").replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
 function cabeceraReporte(){
@@ -27,7 +28,7 @@ function cabeceraReporte(){
 	'			<sup>'+
 	'     			<br><br>PRESIDENCIA DE LA REPÚBLICA<br>'+
 	' 		   		STP -POI<br>'+
-	'   			2017 – 2019<br>'+
+	'   			2018 – 2020<br>'+
 	' 			</sup>'+
 	'		</p>'+	
 	'   </div>'+
@@ -327,12 +328,12 @@ function renderProductoMetaFisica(metaProducto, porDepto,porMes,max ){
     }
 	
 	var texto="";
-	texto+='<div class="row">'+
+	texto+='<div class="row" style="font-size:8px; padding-right: 1px; padding-left: 1px;">'+
 	'<div class="col-md-12">'+
 	'<table class="table table-striped table-condensed">'+
 	'<thead>'+
 	'<tr> '+
-	'<th colspan="13">AÑO 2017</th>'+
+	'<th colspan="13">AÑO 2018</th>'+
 	'</tr>'+
 	'<tr>'+
 	'<th>DEPTO/MES:</th>'+
@@ -354,420 +355,420 @@ function renderProductoMetaFisica(metaProducto, porDepto,porMes,max ){
 	'<tbody>'+
 	'<tr>'+
 	'<td>Asunción:</td>'+ 
-	'<td>'+metaProducto.getCantidadPorMesDepto(1,0,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(2,0,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(3,0,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(4,0,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(5,0,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(6,0,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(7,0,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(8,0,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(9,0,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(10,0,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(11,0,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(12,0,2017)+'</td>';
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,0,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(2,0,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(3,0,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(4,0,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(5,0,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(6,0,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(7,0,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(8,0,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(9,0,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(10,0,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(11,0,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(12,0,2017))+'</td>';
 	if(porDepto[0].suma>0){// si suma es 0 no se hace el toFixed
-		texto+='<td>'+porDepto[0].suma.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(porDepto[0].suma.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+porDepto[0].suma+'</td>';
 	}
 	texto+='</tr>'+
 	'<tr>'+
 	'<td>Concepción:</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(1,1,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(2,1,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(3,1,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(4,1,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(5,1,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(6,1,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(7,1,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(8,1,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(9,1,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(10,1,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(11,1,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(12,1,2017)+'</td>';
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,1,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(2,1,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(3,1,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(4,1,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(5,1,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(6,1,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(7,1,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(8,1,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(9,1,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(10,1,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(11,1,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(12,1,2017))+'</td>';
 	if(porDepto[1].suma>0){// si suma es 0 no se hace el toFixed
-		texto+='<td>'+porDepto[1].suma.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(porDepto[1].suma.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+porDepto[1].suma+'</td>';
 	}
 	texto+='</tr>'+
 	'<tr>'+
 	'<td>San Pedro:</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(1,2,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(2,2,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(3,2,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(4,2,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(5,2,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(6,2,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(7,2,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(8,2,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(9,2,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(10,2,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(11,2,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(12,2,2017)+'</td>';
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,2,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(2,2,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(3,2,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(4,2,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(5,2,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(6,2,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(7,2,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(8,2,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(9,2,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(10,2,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(11,2,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(12,2,2017))+'</td>';
 	if(porDepto[2].suma>0){// si suma es 0 no se hace el toFixed
-		texto+='<td>'+porDepto[2].suma.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(porDepto[2].suma.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+porDepto[2].suma+'</td>';
 	}
 	texto+='</tr>'+
 	'<tr>'+
 	'<td>Cordillera:</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(1,3,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(2,3,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(3,3,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(4,3,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(5,3,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(6,3,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(7,3,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(8,3,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(9,3,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(10,3,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(11,3,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(12,3,2017)+'</td>';
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,3,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(2,3,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(3,3,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(4,3,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(5,3,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(6,3,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(7,3,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(8,3,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(9,3,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(10,3,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(11,3,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(12,3,2017))+'</td>';
 	if(porDepto[3].suma>0){// si suma es 0 no se hace el toFixed
-		texto+='<td>'+porDepto[3].suma.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(porDepto[3].suma.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+porDepto[3].suma+'</td>';
 	}
 	texto+='</tr>'+
 	'<tr>'+
 	'<td>Guaira:</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(1,4,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(2,4,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(3,4,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(4,4,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(5,4,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(6,4,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(7,4,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(8,4,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(9,4,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(10,4,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(11,4,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(12,4,2017)+'</td>';
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,4,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(2,4,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(3,4,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(4,4,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(5,4,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(6,4,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(7,4,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(8,4,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(9,4,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(10,4,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(11,4,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(12,4,2017))+'</td>';
 	if(porDepto[4].suma>0){// si suma es 0 no se hace el toFixed
-		texto+='<td>'+porDepto[4].suma.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(porDepto[4].suma.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+porDepto[4].suma+'</td>';
 	}
 	texto+='</tr>'+
 	'<tr>'+
 	'<td>Caaguazú:</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(1,5,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(2,5,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(3,5,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(4,5,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(5,5,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(6,5,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(7,5,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(8,5,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(9,5,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(10,5,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(11,5,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(12,5,2017)+'</td>';
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,5,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(2,5,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(3,5,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(4,5,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(5,5,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(6,5,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(7,5,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(8,5,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(9,5,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(10,5,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(11,5,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(12,5,2017))+'</td>';
 	if(porDepto[5].suma>0){// si suma es 0 no se hace el toFixed
-		texto+='<td>'+porDepto[5].suma.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(porDepto[5].suma.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+porDepto[5].suma+'</td>';
 	}
 	texto+='</tr>'+
 	'<tr>'+
 	'<td>Caazapá:</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(1,6,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(2,6,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(3,6,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(4,6,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(5,6,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(6,6,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(7,6,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(8,6,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(9,6,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(10,6,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(11,6,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(12,6,2017)+'</td>';
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,6,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(2,6,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(3,6,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(4,6,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(5,6,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(6,6,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(7,6,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(8,6,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(9,6,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(10,6,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(11,6,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(12,6,2017))+'</td>';
 	if(porDepto[6].suma>0){// si suma es 0 no se hace el toFixed
-		texto+='<td>'+porDepto[6].suma.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(porDepto[6].suma.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+porDepto[6].suma+'</td>';
 	}
 	texto+='</tr>'+
 	'<tr>'+
 	'<td>Itapua:</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(1,7,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(2,7,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(3,7,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(4,7,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(5,7,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(6,7,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(7,7,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(8,7,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(9,7,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(10,7,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(11,7,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(12,7,2017)+'</td>';
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,7,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(2,7,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(3,7,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(4,7,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(5,7,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(6,7,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(7,7,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(8,7,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(9,7,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(10,7,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(11,7,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(12,7,2017))+'</td>';
 	if(porDepto[7].suma>0){// si suma es 0 no se hace el toFixed
-		texto+='<td>'+porDepto[7].suma.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(porDepto[7].suma.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+porDepto[7].suma+'</td>';
 	}
 	texto+='</tr>'+
 	'<tr>'+
 	'<td>Misiones:</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(1,8,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(2,8,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(3,8,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(4,8,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(5,8,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(6,8,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(7,8,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(8,8,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(9,8,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(10,8,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(11,8,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(12,8,2017)+'</td>';
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,8,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(2,8,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(3,8,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(4,8,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(5,8,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(6,8,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(7,8,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(8,8,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(9,8,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(10,8,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(11,8,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(12,8,2017))+'</td>';
 	if(porDepto[8].suma>0){// si suma es 0 no se hace el toFixed
-		texto+='<td>'+porDepto[8].suma.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(porDepto[8].suma.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+porDepto[8].suma+'</td>';
 	}
 	texto+='</tr> '+
 	'<tr>'+
 	'<td>Paraguari:</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(1,9,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(2,9,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(3,9,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(4,9,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(5,9,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(6,9,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(7,9,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(8,9,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(9,9,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(10,9,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(11,9,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(12,9,2017)+'</td>';
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,9,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(2,9,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(3,9,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(4,9,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(5,9,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(6,9,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(7,9,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(8,9,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(9,9,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(10,9,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(11,9,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(12,9,2017))+'</td>';
 	if(porDepto[9].suma>0){// si suma es 0 no se hace el toFixed
-		texto+='<td>'+porDepto[9].suma.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(porDepto[9].suma.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+porDepto[9].suma+'</td>';
 	}
 	texto+='</tr>'+
 	'<tr>'+
 	'<td>Alto Parana:</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(1,10,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(2,10,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(3,10,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(4,10,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(5,10,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(6,10,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(7,10,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(8,10,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(9,10,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(10,10,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(11,10,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(12,10,2017)+'</td>';
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,10,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(2,10,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(3,10,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(4,10,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(5,10,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(6,10,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(7,10,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(8,10,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(9,10,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(10,10,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(11,10,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(12,10,2017))+'</td>';
 	if(porDepto[10].suma>0){// si suma es 0 no se hace el toFixed
-		texto+='<td>'+porDepto[10].suma.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(porDepto[10].suma.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+porDepto[10].suma+'</td>';
 	}
 	texto+='</tr>'+
 	'<tr>'+
 	'<td>Central:</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(1,11,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(2,11,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(3,11,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(4,11,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(5,11,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(6,11,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(7,11,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(8,11,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(9,11,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(10,11,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(11,11,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(12,11,2017)+'</td>';
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,11,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(2,11,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(3,11,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(4,11,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(5,11,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(6,11,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(7,11,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(8,11,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(9,11,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(10,11,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(11,11,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(12,11,2017))+'</td>';
 	if(porDepto[11].suma>0){// si suma es 0 no se hace el toFixed
-		texto+='<td>'+porDepto[11].suma.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(porDepto[11].suma.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+porDepto[11].suma+'</td>';
 	}
 	texto+='</tr>  '+
 	'<tr>'+
 	'<td>Ñeembucú:</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(1,12,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(2,12,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(3,12,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(4,12,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(5,12,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(6,12,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(7,12,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(8,12,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(9,12,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(10,12,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(11,12,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(12,12,2017)+'</td>';
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,12,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(2,12,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(3,12,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(4,12,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(5,12,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(6,12,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(7,12,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(8,12,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(9,12,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(10,12,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(11,12,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(12,12,2017))+'</td>';
 	if(porDepto[12].suma>0){// si suma es 0 no se hace el toFixed
-		texto+='<td>'+porDepto[12].suma.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(porDepto[12].suma.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+porDepto[12].suma+'</td>';
 	}
 	texto+='</tr>  '+
 	'<tr>'+
 	'<td>Amambay:</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(1,13,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(2,13,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(3,13,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(4,13,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(5,13,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(6,13,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(7,13,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(8,13,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(9,13,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(10,13,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(11,13,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(12,13,2017)+'</td>';
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,13,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(2,13,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(3,13,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(4,13,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(5,13,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(6,13,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(7,13,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(8,13,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(9,13,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(10,13,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(11,13,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(12,13,2017))+'</td>';
 	if(porDepto[13].suma>0){// si suma es 0 no se hace el toFixed
-		texto+='<td>'+porDepto[13].suma.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(porDepto[13].suma.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+porDepto[13].suma+'</td>';
 	}
 	texto+='</tr>  '+
 	'<tr>'+
 	'<td>Canindeyu:</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(1,14,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(2,14,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(3,14,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(4,14,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(5,14,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(6,14,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(7,14,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(8,14,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(9,14,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(10,14,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(11,14,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(12,14,2017)+'</td>';
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,14,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(2,14,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(3,14,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(4,14,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(5,14,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(6,14,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(7,14,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(8,14,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(9,14,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(10,14,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(11,14,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(12,14,2017))+'</td>';
 	if(porDepto[14].suma>0){// si suma es 0 no se hace el toFixed
-		texto+='<td>'+porDepto[14].suma.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(porDepto[14].suma.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+porDepto[14].suma+'</td>';
 	}
 	texto+='</tr>  '+
 	'<tr>'+
 	'<td>Pte. Hayes:</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(1,15,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(2,15,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(3,15,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(4,15,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(5,15,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(6,15,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(7,15,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(8,15,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(9,15,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(10,15,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(11,15,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(12,15,2017)+'</td>';
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,15,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(2,15,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(3,15,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(4,15,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(5,15,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(6,15,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(7,15,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(8,15,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(9,15,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(10,15,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(11,15,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(12,15,2017))+'</td>';
 	if(porDepto[15].suma>0){// si suma es 0 no se hace el toFixed
-		texto+='<td>'+porDepto[15].suma.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(porDepto[15].suma.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+porDepto[15].suma+'</td>';
 	}
 	texto+='</tr> '+
 	'<tr>'+
 	'<td>Boqueron:</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(1,16,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(2,16,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(3,16,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(4,16,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(5,16,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(6,16,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(7,16,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(8,16,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(9,16,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(10,16,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(11,16,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(12,16,2017)+'</td>';
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,16,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(2,16,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(3,16,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(4,16,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(5,16,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(6,16,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(7,16,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(8,16,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(9,16,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(10,16,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(11,16,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(12,16,2017))+'</td>';
 	if(porDepto[16].suma>0){// si suma es 0 no se hace el toFixed
-		texto+='<td>'+porDepto[16].suma.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(porDepto[16].suma.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+porDepto[16].suma+'</td>';
 	}
 	texto+='</tr>  '+
 	'<tr>'+
 	'<td>Alto Paraguay:</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(1,17,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(2,17,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(3,17,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(4,17,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(5,17,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(6,17,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(7,17,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(8,17,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(9,17,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(10,17,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(11,17,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(12,17,2017)+'</td>';
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,17,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(2,17,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(3,17,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(4,17,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(5,17,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(6,17,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(7,17,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(8,17,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(9,17,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(10,17,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(11,17,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(12,17,2017))+'</td>';
 	if(porDepto[17].suma>0){// si suma es 0 no se hace el toFixed
-		texto+='<td>'+porDepto[17].suma.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(porDepto[17].suma.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+porDepto[17].suma+'</td>';
 	}
 	texto+='</tr>'+
 	'<tr>'+
 	'<td>Aux. Trasp.:</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(1,88,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(2,88,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(3,88,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(4,88,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(5,88,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(6,88,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(7,88,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(8,88,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(9,88,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(10,88,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(11,88,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(12,88,2017)+'</td>';	
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,88,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(2,88,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(3,88,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(4,88,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(5,88,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(6,88,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(7,88,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(8,88,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(9,88,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(10,88,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(11,88,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(12,88,2017))+'</td>';	
 	if(porDepto[18].suma>0){// si suma es 0 no se hace el toFixed
-		texto+='<td>'+porDepto[18].suma.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(porDepto[18].suma.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+porDepto[18].suma+'</td>';
 	}
 	texto+='</tr>  '+
 	'<tr>'+
 	'<td>Alc. Nacional:</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(1,99,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(2,99,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(3,99,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(4,99,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(5,99,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(6,99,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(7,99,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(8,99,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(9,99,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(10,99,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(11,99,2017)+'</td>'+
-	'<td>'+metaProducto.getCantidadPorMesDepto(12,99,2017)+'</td>';	
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,99,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(2,99,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(3,99,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(4,99,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(5,99,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(6,99,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(7,99,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(8,99,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(9,99,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(10,99,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(11,99,2017))+'</td>'+
+	'<td>'+numeroConComa(metaProducto.getCantidadPorMesDepto(12,99,2017))+'</td>';	
 	if(porDepto[19].suma>0){// si suma es 0 no se hace el toFixed
-		texto+='<td>'+porDepto[19].suma.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(porDepto[19].suma.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+porDepto[19].suma+'</td>';
 	}
 	texto+=' </tr>'+
 	'<tr>'+
 	'<td>Total Mes:</td>'+
-	'<td>'+porMes[0].suma.toFixed(2)+'</td>'+
-	'<td>'+porMes[1].suma.toFixed(2)+'</td>'+
-	'<td>'+porMes[2].suma.toFixed(2)+'</td>'+
-	'<td>'+porMes[3].suma.toFixed(2)+'</td>'+
-	'<td>'+porMes[4].suma.toFixed(2)+'</td>'+
-	'<td>'+porMes[5].suma.toFixed(2)+'</td>'+
-	'<td>'+porMes[6].suma.toFixed(2)+'</td>'+
-	'<td>'+porMes[7].suma.toFixed(2)+'</td>'+
-	'<td>'+porMes[8].suma.toFixed(2)+'</td>'+
-	'<td>'+porMes[9].suma.toFixed(2)+'</td>'+
-	'<td>'+porMes[10].suma.toFixed(2)+'</td>'+
-	'<td>'+porMes[11].suma.toFixed(2)+'</td>';
+	'<td>'+numeroConComa(porMes[0].suma)+'</td>'+
+	'<td>'+numeroConComa(porMes[1].suma)+'</td>'+
+	'<td>'+numeroConComa(porMes[2].suma)+'</td>'+
+	'<td>'+numeroConComa(porMes[3].suma)+'</td>'+
+	'<td>'+numeroConComa(porMes[4].suma)+'</td>'+
+	'<td>'+numeroConComa(porMes[5].suma)+'</td>'+
+	'<td>'+numeroConComa(porMes[6].suma)+'</td>'+
+	'<td>'+numeroConComa(porMes[7].suma)+'</td>'+
+	'<td>'+numeroConComa(porMes[8].suma)+'</td>'+
+	'<td>'+numeroConComa(porMes[9].suma)+'</td>'+
+	'<td>'+numeroConComa(porMes[10].suma)+'</td>'+
+	'<td>'+numeroConComa(porMes[11].suma)+'</td>';
 	if(max>0){// si max es 0 no se hace el toFixed
-		texto+='<td>'+max.toFixed(2)+'</td>';
+		texto+='<td>'+numeroConComa(max.toFixed(2))+'</td>';
 	} else {
 		texto+='<td>'+max+'</td>';
 	}	
@@ -779,8 +780,8 @@ function renderProductoMetaFisica(metaProducto, porDepto,porMes,max ){
 	'<div class="row">'+
 	'<div class="col-md-12">'+
 	'<table class="table table-striped" style="border:1px solid silver">'+
-	'<tr><td><center><strong>2018:</strong></center></td><td><center><strong>2019:</strong></center></td></tr>'+
-	'<tr><td><center>'+metaProducto.getCantidadPorMesDepto(1,99,2018)+'</center></td><td><center>'+metaProducto.getCantidadPorMesDepto(1,99,2019)+'</center></td></tr>'+
+	'<tr><td><center><strong>2019:</strong></center></td><td><center><strong>2020:</strong></center></td></tr>'+
+	'<tr><td><center>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,99,2018))+'</center></td><td><center>'+numeroConComa(metaProducto.getCantidadPorMesDepto(1,99,2019))+'</center></td></tr>'+
 	'</table>'+
 	'</div><!-- /.col -->'+
 	'</div>';
@@ -804,7 +805,7 @@ function renderMetas(indicadorId){
 			//webServicesMetas=webServicesMetas[indMetas];
 			
 			//for(var a = 0; a < webServicesMetas.length; a++){
-				cuerpoMetas += '<tr><td>'+webServicesMetas[indMetas].vencimiento+'</td><td>'+webServicesMetas[indMetas].cantidad+'</td></tr>';
+				cuerpoMetas += '<tr><td>'+webServicesMetas[indMetas].vencimiento+'</td><td>'+numeroConComa(webServicesMetas[indMetas].cantidad)+'</td></tr>';
 				cantidadMetas++;
 			//}
 		}
@@ -1408,7 +1409,7 @@ $("body").on("click", "#generarReporte",function(event){
 	'				<div class="col-xs-12">'+
 	'					<h1 id="tituloEntidad"><center></center></h1></br>'+
 	'					<small><center>PLAN OPERATIVO INSTITUCIONAL PERIODO<br>'+
-	'   	 			2017 – 2019</center></small>'+
+	'   	 			2018 – 2020</center></small>'+
 	'  	 				</br></br></br></br></br></br></br></br>'+
 	'   			</div>'+
 	'				<strong><hr></strong>'+
@@ -1997,9 +1998,9 @@ $("body").on("click", "#generarReporte",function(event){
 																		max=Math.max.apply(null, mayorVec);
 																	}																	
 																	if(max>0){// si suma es 0 no se hace el toFixed
-																		subprogramaCuerpo+=", <strong>Meta 2017:</strong> "+max.toFixed(2);
+																		subprogramaCuerpo+=", <strong>Meta 2018:</strong> "+numeroConComa(max.toFixed(2));
 																	} else {
-																		subprogramaCuerpo+=", <strong>Meta 2017:</strong> "+max;
+																		subprogramaCuerpo+=", <strong>Meta 2018:</strong> "+max;
 																	}
 																}//fin check programacion
 															}

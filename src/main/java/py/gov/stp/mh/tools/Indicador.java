@@ -37,6 +37,7 @@ public class Indicador {
 	 protected int objetivoId=0;
 	 protected int nivel=0;
 	 protected int entidad=0;
+	 protected String usuarioResponsable;
 	 
 	 
 	public short getBorradoInt() {
@@ -233,6 +234,12 @@ public class Indicador {
 	}
 	public void changeBorrado(){
 		this.borrado=!borrado;
-	}	 
+	}
+	public String getUsuarioResponsable() {
+		return usuarioResponsable;
+	}
+	public void setUsuarioResponsable(String usuarioResponsable) {
+		this.usuarioResponsable = usuarioResponsable;
+	}
 
 }

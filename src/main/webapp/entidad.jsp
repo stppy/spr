@@ -133,7 +133,8 @@ if (user != null) { %>
 			$("#unidadJerarquicaDescrip").attr("value","0");
 		}
 
-		<% if (attributes.get("role_id").toString().equals("2") || attributes.get("role_id").toString().equals("3")){%>
+		<% if (attributes.get("role_id").toString().equals("3")){%>
+		<%-- <% if (attributes.get("role_id").toString().equals("2") || attributes.get("role_id").toString().equals("3")){%> --%>
 			$("#abrev").attr("disabled","");
 			$("#baseLegal").attr("disabled","");
 			$("#mision").attr("disabled","");

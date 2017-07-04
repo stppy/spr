@@ -2628,8 +2628,8 @@ $( document ).ready(function() {
 									'			<div class="modal-content" >'+
 									'				<div class="modal-header '+clase+'">'+
 									'		        	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>'+									   
-									'					<h3 class="modal-title"><strong>Eje Estrategico: </strong>'+ejeNombre+'</h3>'+
-									'		        	<h4 class="modal-title"><strong>Linea Transversal: </strong>'+lineaNombre+' <strong>Estrategia: </strong>'+estrategiaNombre+' </h4>'+
+									'					<h3 class="modal-title"><strong>Estrategia: </strong>'+estrategiaNombre+'</h3>'+
+									'		        	<h4 class="modal-title"><strong>Eje Estrategico: </strong>'+ejeNombre+' <strong>Linea Transversal: </strong>'+lineaNombre+' </h4>'+
 									'					<br><h5 class="modal-title" id="concatCabecera"></h5>'+  
 									'				</div>'+
 									'			    <div class="modal-body" id="modalNivelGlobal">'+
@@ -2644,8 +2644,8 @@ $( document ).ready(function() {
 					                '							<li style="position: relative; top: 10px;"><small><i class="fa fa-arrow-right"></i></small></li>'+
 					                '							<li><a href="#tab_2-2" data-toggle="tab" title="Objetivos"><i class="fa  fa-chain "></i></a></li>'+
 					                '							<li style="position: relative; top: 10px;"><small><i class="fa fa-arrow-right"></i></small></li>'+
-					                '							<li><a href="#tab_8-8" data-toggle="tab" title="Visualizacion Cadena de Valor" id="Visualizacion"><i class="fa fa-connectdevelop"></i></a></li>'+
-					                '							<li style="position: relative; top: 10px;"><small><i class="fa fa-angle-right"></i></small></li>'+
+					                '							<!-- li><a href="#tab_8-8" data-toggle="tab" title="Visualizacion Cadena de Valor" id="Visualizacion"><i class="fa fa-connectdevelop"></i></a></li -->'+
+					                '							<!-- li style="position: relative; top: 10px;"><small><i class="fa fa-arrow-right"></i></small></li -->'+
 					                '							<li><a href="#tab_6-6" data-toggle="tab" title="Cadena de Valor" id="Cadena"><i class="fa fa-sitemap"></i></a></li>'+
 					                '							<li style="position: relative; top: 10px;"><small><i class="fa fa-arrow-right"></i></small></li>'+
 					                '							<li><a href="#tab_1-1" data-toggle="tab"  title="Entidades"><i class="fa fa-building"></i></a></li>'+
@@ -2656,7 +2656,7 @@ $( document ).ready(function() {
 					                '							<div class="tab-pane" id="tab_3-3">'+renderProductos(productos)+'</div>'+
 					                '							<div class="tab-pane" id="tab_4-4">'+renderDestinatarios(destinatariosCategoriaNombre,destinatariosCategoriaCantidad)+'</div>'+
 					                '							<div class="tab-pane" id="tab_6-6">'+renderEstructura(entregas, monto, resultados, productos, clase, objetivos)+'</div>'+
-					                '							<div class="tab-pane" id="tab_8-8"><iframe width="1060" height="615" src="/frames/visualizacionCadenaValor.jsp" frameborder="0" ></iframe></div>'+
+					                '							<!-- div class="tab-pane" id="tab_8-8"><iframe width="1060" height="615" src="/frames/visualizacionCadenaValor.jsp" frameborder="0" ></iframe></div-->'+
 					                '							<div class="tab-pane" id="tab_7-7">'+renderGastos(financiamientos, financiamientosDec, financiamientosUnidad, objetoGastosFiltrados, objetoGastosXDecenas, objetoGastosXUnidad)+'</div>'+//aca le tenemos que pasar la variable nueva
 					                '							<div class="tab-pane" id="tab_5-5">'+renderDepartamentos()+'</div>'+
 					                '						</div>'+
@@ -2676,8 +2676,8 @@ $( document ).ready(function() {
 			
 			//cabecera del box contenedor de todo
 			cabeceraBoxInfo ='	<div class="box-header '+clase+'">'+
-			'					<h3 class="modal-title"><strong>Eje Estrategico: </strong>'+ejeNombre+'</h3>'+
-			'		        	<h4 class="modal-title"><strong>Linea Transversal: </strong>'+lineaNombre+' <strong>Estrategia: </strong>'+estrategiaNombre+' </h4>'+
+			'					<h3 class="modal-title"><strong>Estrategia: </strong>'+estrategiaNombre+'</h3>'+
+			'		        	<h4 class="modal-title"><strong>Eje Estrategico: </strong>'+ejeNombre+' <strong> Linea Transversal: </strong>'+lineaNombre+'</h4>'+
 			'						<br><h5 class="modal-title" id="concatCabecera"></h5>'+ 
 			'					</div>';
 

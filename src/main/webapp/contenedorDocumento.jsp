@@ -97,7 +97,9 @@ if (user != null) { %>
 	
 		$('#fechaDocumento').datepicker({  
 			language: "es",
-			format: 'yyyy-mm-dd'});
+			format: 'yyyy-mm-dd',
+			todayBtn: "linked",
+		    todayHighlight: true});
 		
 		var rol_jsp=<%=attributes.get("role_id").toString() %>;
 			
@@ -817,7 +819,9 @@ if (user != null) { %>
 				$('#modalEditarDocumento').modal('show');
 				$('#fechaDocumento').datepicker({  
 					language: "es",
-					format: 'yyyy-mm-dd'});
+					format: 'yyyy-mm-dd',
+					todayBtn: "linked",
+				    todayHighlight: true});
 		 });
 			
 			$("body").on("click", ".editarDocumento",function(event){

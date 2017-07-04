@@ -209,6 +209,7 @@ textarea { text-transform: uppercase; }
 							<LI>La cuenta de usuario es personal, y la contraseña no debe ser compartida con otra/s persona/s.
 							<LI>Las operaciones realizadas en la base de datos con la cuenta de usuario solicitada son de exclusiva responsabilidad del usuario.
 							El solo ingreso a los sistemas administrados por la DGTIC, implica la aceptación de los presentes condiciones de Uso.
+							<LI>Todos los datos proveidos al sistema serán considerados datos abiertos.
 							</OL>
 							</p>
 	  					</td>
