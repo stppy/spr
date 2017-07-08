@@ -959,13 +959,13 @@ function Combo(){
 		var todosLosProductos = [];
 		var contador=0;
 			
-		var todosLosProductosHacienda = $.ajax({
+/*		var todosLosProductosHacienda = $.ajax({
           url:'/ajaxSelects?accion=getPivotProductoFisico&nivel='+linkNivel+'&entidad='+linkEntidad+'&tipoPresupuesto='+linkTipoPresupuesto+'&programa='+linkPrograma+'&subprograma='+linkSubPrograma+'&proyecto='+linkProyecto+'&anho='+anho,
           type:'get',
           dataType:'json',
           async:false       
         }).responseText;
-		todosLosProductosHacienda = JSON.parse(todosLosProductosHacienda);
+		todosLosProductosHacienda = JSON.parse(todosLosProductosHacienda);*/
 
       	if(isNaN(linkNivel)==false && isNaN(linkEntidad)==false && isNaN(linkTipoPresupuesto)==false && isNaN(linkPrograma)==false &&
       			isNaN(linkSubPrograma)==false && isNaN(linkProyecto)==false){
@@ -1590,7 +1590,7 @@ function Combo(){
 			}
 			
 			
-        	for(var t = 0; t < todosLosProductosHacienda.length; t++){
+  /*      	for(var t = 0; t < todosLosProductosHacienda.length; t++){
         		
         		if(datosProductos.producto[i].producto_id == todosLosProductosHacienda[t].codigoProducto){
 //        			metasProducto.push(todosLosProductosHacienda[t].meta1);
@@ -1624,11 +1624,11 @@ function Combo(){
         			totalMetaN = (todosLosProductosHacienda[t].meta1 + todosLosProductosHacienda[t].meta2 + todosLosProductosHacienda[t].meta3 + todosLosProductosHacienda[t].meta4 + todosLosProductosHacienda[t].meta5 + todosLosProductosHacienda[t].meta6 + todosLosProductosHacienda[t].meta7 + todosLosProductosHacienda[t].meta8 + todosLosProductosHacienda[t].meta9 + todosLosProductosHacienda[t].meta10 + todosLosProductosHacienda[t].meta11 + todosLosProductosHacienda[t].meta12);
         		}
         		
-        	}
+        	}*/
 			filaProduct2="";
 			band = 0;
 
-        	for(var e = 0; e < todosLosProductosHacienda.length; e++){
+        /*	for(var e = 0; e < todosLosProductosHacienda.length; e++){
 
         		if(datosProductos.producto[i].producto_id == todosLosProductosHacienda[e].codigoProducto){
             		
@@ -1677,7 +1677,8 @@ function Combo(){
         					'<th id="sumaMesSPR-'+linkNivel+'-'+linkEntidad+'-'+linkTipoPresupuesto+'-'+linkPrograma+'-'+linkSubPrograma+'-'+linkProyecto+'-'+linkProducto+'-10" class="'+colorear(todosLosProductosHacienda[e].meta10,sumaMes[10])+'">'+parseFloat(sumaMes[10]).round(2)+'</th>'+
         					'<th id="sumaMesSPR-'+linkNivel+'-'+linkEntidad+'-'+linkTipoPresupuesto+'-'+linkPrograma+'-'+linkSubPrograma+'-'+linkProyecto+'-'+linkProducto+'-11" class="'+colorear(todosLosProductosHacienda[e].meta11,sumaMes[11])+'">'+parseFloat(sumaMes[11]).round(2)+'</th>'+
         					'<th id="sumaMesSPR-'+linkNivel+'-'+linkEntidad+'-'+linkTipoPresupuesto+'-'+linkPrograma+'-'+linkSubPrograma+'-'+linkProyecto+'-'+linkProducto+'-12" class="'+colorear(todosLosProductosHacienda[e].meta12,sumaMes[12])+'">'+parseFloat(sumaMes[12]).round(2)+'</th>';
-            		}}
+            		}
+        		}*/
         	if(band == 0){
     			filaProduct2+=
     				'<tr>'+
