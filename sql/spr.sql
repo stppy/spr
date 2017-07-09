@@ -1,4 +1,4 @@
--- Adminer 4.3.1 PostgreSQL dump
+﻿-- Adminer 4.3.1 PostgreSQL dump
 
 \connect "spr";
 
