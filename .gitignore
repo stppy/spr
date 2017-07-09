@@ -6,3 +6,5 @@ target/*
 */pom.properties
 .metadata/*
 .DS_Store
+.idea/
+*.iml

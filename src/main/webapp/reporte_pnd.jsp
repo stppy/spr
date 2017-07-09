@@ -1271,6 +1271,7 @@ span.badge{
     </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
 		<script src="frames/sprUtils.js"></script>
+		<script src="frames/reportePND_refactor.js"></script>
 		<script src="frames/reportePND.js"></script>
 
       <footer class="main-footer">
