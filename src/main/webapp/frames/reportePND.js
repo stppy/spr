@@ -2068,13 +2068,13 @@ $( document ).ready(function() {
 		    }).responseText;
 			pndDestinatariosContenido = JSON.parse(pndDestinatariosContenido);
 			
-			var pndProductosContenido = $.ajax({
-		    	url:'http://spr.stp.gov.py/ajaxSelects?accion=getPndProductos&estrategia='+estrategia+'&eje='+eje+'&linea='+linea+condicion,
-		      	type:'get',
-		      	dataType:'json',
-		      	async:false       
-		    }).responseText;
-			pndProductosContenido = JSON.parse(pndProductosContenido);
+			// var pndProductosContenido = $.ajax({
+		    	// url:'http://spr.stp.gov.py/ajaxSelects?accion=getPndProductos&estrategia='+estrategia+'&eje='+eje+'&linea='+linea+condicion,
+		     //  	type:'get',
+		     //  	dataType:'json',
+		     //  	async:false
+            // }).responseText;
+			// pndProductosContenido = JSON.parse(pndProductosContenido);
 			
 			var totalesEntidad = $.ajax({
 		    	url:'http://spr.stp.gov.py/ajaxSelects?accion=getContadoresPNDporEntidad&estrategia='+estrategia+'&eje='+eje+'&linea='+linea+condicion,
@@ -2308,54 +2308,54 @@ $( document ).ready(function() {
 					}
 				}
 			}
-			/*************************** EO Funciones para tab Gastos ***************************/
-			
-			var productosConcat=[];
-			var productos=[];
-			for (var i=0; i<pndProductosContenido.length;i++){
-				if(productosConcat.indexOf(pndProductosContenido[i].prod_concat)<0){
-					productosConcat.push(pndProductosContenido[i].prod_concat);
-					var objeto=new Object();
-					objeto.prod_id=pndProductosContenido[i].prod_id;
-					objeto.concat=pndProductosContenido[i].prod_concat;
-					objeto.nombre=pndProductosContenido[i].producto_nombre;
-					objeto.clase=pndProductosContenido[i].producto_clase;
-					objeto.unidad_medida=pndProductosContenido[i].unidad_medida;
-					objeto.cantidad2017=parseInt(0);
-					objeto.cantidad2018=parseInt(0);
-					objeto.cantidad2019=parseInt(0);
-					objeto.presupuesto=parseFloat(0.0);
-					if( pndProductosContenido[i].anho=="2017"){
-						objeto.cantidad2017=pndProductosContenido[i].cantidad;
-						objeto.presupuesto=pndProductosContenido[i].presupuesto;
-					}
-					if( pndProductosContenido[i].anho=="2018"){
-						objeto.cantidad2018=pndProductosContenido[i].cantidad;
-					}
-					if( pndProductosContenido[i].anho=="2019"){
-						objeto.cantidad2019=pndProductosContenido[i].cantidad;
-					}
-					 productos.push(objeto);
-				}else{
-					if(productosConcat.indexOf(pndProductosContenido[i].prod_concat)>=0){
-						for (var j=0; j<productos.length;j++){
-							if(productos[j].concat==pndProductosContenido[i].prod_concat){
-								if( pndProductosContenido[i].anho=="2017"){
-									productos[j].cantidad2017=pndProductosContenido[i].cantidad;
-									productos[j].presupuesto+=pndProductosContenido[i].presupuesto;
-								}
-								if( pndProductosContenido[i].anho=="2018"){
-									productos[j].cantidad2018=pndProductosContenido[i].cantidad;
-								}
-								if( pndProductosContenido[i].anho=="2019"){
-									productos[j].cantidad2019=pndProductosContenido[i].cantidad;
-								}
-								
-							}
-						}
-					}
-				}
-			}
+			/*************************** EO Funciones para tab Productos ***************************/
+			//
+			// var productosConcat=[];
+			// var productos=[];
+			// for (var i=0; i<pndProductosContenido.length;i++){
+			// 	if(productosConcat.indexOf(pndProductosContenido[i].prod_concat)<0){
+			// 		productosConcat.push(pndProductosContenido[i].prod_concat);
+			// 		var objeto=new Object();
+			// 		objeto.prod_id=pndProductosContenido[i].prod_id;
+			// 		objeto.concat=pndProductosContenido[i].prod_concat;
+			// 		objeto.nombre=pndProductosContenido[i].producto_nombre;
+			// 		objeto.clase=pndProductosContenido[i].producto_clase;
+			// 		objeto.unidad_medida=pndProductosContenido[i].unidad_medida;
+			// 		objeto.cantidad2017=parseInt(0);
+			// 		objeto.cantidad2018=parseInt(0);
+			// 		objeto.cantidad2019=parseInt(0);
+			// 		objeto.presupuesto=parseFloat(0.0);
+			// 		if( pndProductosContenido[i].anho=="2017"){
+			// 			objeto.cantidad2017=pndProductosContenido[i].cantidad;
+			// 			objeto.presupuesto=pndProductosContenido[i].presupuesto;
+			// 		}
+			// 		if( pndProductosContenido[i].anho=="2018"){
+			// 			objeto.cantidad2018=pndProductosContenido[i].cantidad;
+			// 		}
+			// 		if( pndProductosContenido[i].anho=="2019"){
+			// 			objeto.cantidad2019=pndProductosContenido[i].cantidad;
+			// 		}
+			// 		 productos.push(objeto);
+			// 	}else{
+			// 		if(productosConcat.indexOf(pndProductosContenido[i].prod_concat)>=0){
+			// 			for (var j=0; j<productos.length;j++){
+			// 				if(productos[j].concat==pndProductosContenido[i].prod_concat){
+			// 					if( pndProductosContenido[i].anho=="2017"){
+			// 						productos[j].cantidad2017=pndProductosContenido[i].cantidad;
+			// 						productos[j].presupuesto+=pndProductosContenido[i].presupuesto;
+			// 					}
+			// 					if( pndProductosContenido[i].anho=="2018"){
+			// 						productos[j].cantidad2018=pndProductosContenido[i].cantidad;
+			// 					}
+			// 					if( pndProductosContenido[i].anho=="2019"){
+			// 						productos[j].cantidad2019=pndProductosContenido[i].cantidad;
+			// 					}
+			//
+			// 				}
+			// 			}
+			// 		}
+			// 	}
+			// }
 			
 			var destinatariosCategoriaId=[];
 			var destinatariosCategoriaNombre=[];
@@ -2597,31 +2597,28 @@ $( document ).ready(function() {
 	        var entregas =parseFloat(0);
 	        var monto =parseFloat(0);
 
-	        for(var e = 0;e<productos.length; e++){
-				if(productos[e].presupuesto != null){
-					monto+=parseFloat(productos[e].presupuesto);
-				}
-			}
-	        for(var e = 0;e<destinatariosCategoriaCantidad.length; e++){
-				if(destinatariosCategoriaCantidad[e] != null && destinatariosCategoriaCantidad[e] != 0){
-					entregas+=parseFloat(destinatariosCategoriaCantidad[e]);
-				}
-			}
-
-	        var entregas1=numeroConComa(entregas);
-	        var monto1=numeroConComa(monto);
-	        
-	        var entregas2=numeroEntero(entregas1);
-	        var monto2=numeroEntero(monto1);
-	        
-		    if(entregas1 != 0){
-		    	var idParsed = entregas1.split(",");  
-		    	entregas = idParsed[0];
-		    }
-		    if(monto1 != 0){
-			    var idParsed = monto1.split(",");  
-			    monto = idParsed[0];
-		    }
+            // for(var e = 0;e<productos.length; e++){
+				// if(productos[e].presupuesto != null){
+				// 	monto+=parseFloat(productos[e].presupuesto);
+				// }
+            // }
+            // for(var e = 0;e<destinatariosCategoriaCantidad.length; e++){
+				// if(destinatariosCategoriaCantidad[e] != null && destinatariosCategoriaCantidad[e] != 0){
+				// 	entregas+=parseFloat(destinatariosCategoriaCantidad[e]);
+				// }
+            // }
+            //
+            // var entregas1=numeroConComa(entregas);
+            // var monto1=numeroConComa(monto);
+				//
+		    // if(entregas1 != 0){
+		    // 	var idParsed = entregas1.split(",");
+		    // 	entregas = idParsed[0];
+		    // }
+		    // if(monto1 != 0){
+			 //    var idParsed = monto1.split(",");
+			 //    monto = idParsed[0];
+		    // }
 		    
 			cuerpoModalC1F1Entidades =	'<div class="modal fade" id="modalC1F1Entidades" tabindex="-1" aria-labelledby="myLargeModalLabel">'+
 									'		<div class="modal-dialog modal-lg" style="width:90%">'+
@@ -2653,11 +2650,14 @@ $( document ).ready(function() {
 					                '						<div class="tab-content">'+
 					                '							<div class="tab-pane" id="tab_1-1">'+renderEntidades(totalesEntidad)+'</div>'+
 					                '							<div class="tab-pane" id="tab_2-2"><p>'+renderObjetivos(totalesObjetivos)+'</p></div>'+
-					                '							<div class="tab-pane" id="tab_3-3">'+renderProductos(productos)+'</div>'+
+									'							<div class="tab-pane" id="tab_3-3"></div>'+
+				//'							<div class="tab-pane" id="tab_3-3">'+renderProductos(productos)+'</div>'+
 					                '							<div class="tab-pane" id="tab_4-4">'+renderDestinatarios(destinatariosCategoriaNombre,destinatariosCategoriaCantidad)+'</div>'+
-					                '							<div class="tab-pane" id="tab_6-6">'+renderEstructura(entregas, monto, resultados, productos, clase, objetivos)+'</div>'+
+				// '							<div class="tab-pane" id="tab_6-6">'+renderEstructura(entregas, monto, resultados, productos, clase, objetivos)+'</div>'+
+				 					'							<div class="tab-pane" id="tab_6-6"></div>'+
 					                '							<!-- div class="tab-pane" id="tab_8-8"><iframe width="1060" height="615" src="/frames/visualizacionCadenaValor.jsp" frameborder="0" ></iframe></div-->'+
-					                '							<div class="tab-pane" id="tab_7-7">'+renderGastos(financiamientos, financiamientosDec, financiamientosUnidad, objetoGastosFiltrados, objetoGastosXDecenas, objetoGastosXUnidad)+'</div>'+//aca le tenemos que pasar la variable nueva
+				// '							<div class="tab-pane" id="tab_7-7">'+renderGastos(financiamientos, financiamientosDec, financiamientosUnidad, objetoGastosFiltrados, objetoGastosXDecenas, objetoGastosXUnidad)+'</div>'+//aca le tenemos que pasar la variable nueva
+									'							<div class="tab-pane" id="tab_7-7"></div>'+//aca le tenemos que pasar la variable nueva
 					                '							<div class="tab-pane" id="tab_5-5">'+renderDepartamentos()+'</div>'+
 					                '						</div>'+
 					              	'					</div>'+
@@ -2666,7 +2666,27 @@ $( document ).ready(function() {
 									'		</div>'+
 									'	</div>'; 
 			$("body").append(cuerpoModalC1F1Entidades);
+			$('body').on('shown.bs.modal', function () {
+				var draw_active_tab = function() {
+					var active_id = $('.modal').find('li[class="active"]>a')[0].href.split('#')[1];
+					var productosRenderer = function(){
+						dataFetcher.getProductos(estrategia, eje, linea, condicion).done(function(productos){
+							if(!$('#tab_3-3').html()) $('#tab_3-3').html(renderProductos(productos));
+							tableRenderer.renderProductosTable();
+						});
+					}
+					var handler_map = { 'tab_3-3': productosRenderer };
+					if(handler_map[active_id]) handler_map[active_id]();
+				}
+
+				$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+					draw_active_tab();
+				});
+
+				draw_active_tab();
+			});
 			$("#modalC1F1Entidades").modal('show');
+
 			
 			//cuerpo de la tabla de objetivos por 
 			cuerpoTablaObjetivos ='	<div class="box-body">'+
@@ -3602,89 +3622,7 @@ $( document ).ready(function() {
 			            }
 			        }
 				} );
-				$("#dataTableProductos").DataTable( {
-			        dom: 'Bfrtip',
-			        buttons: [
-			                    {
-			                        extend: 'copy',
-			                        exportOptions: {
-			                    columns: [ 0,1,2,3,5,7,9,11 ]
-			                }
-			                    },
-			                    {
-			                        extend: 'csv',
-			                        exportOptions: {
-			                    columns: [ 0,1,2,3,5,7,9,11 ]
-			                }
-			                    },
-			                    {
-			                        extend: 'excel',
-			                        exportOptions: {
-			                    columns: [ 0,1,2,3,5,7,9,11 ]
-			                }
-			                    },
-			                    {
-			                        extend: 'pdf',
-			                        exportOptions: {
-			                    columns: [ 0,1,2,3,5,7,9,11 ]
-			                }
-			                    },
-			                    {
-			                        extend: 'print',
-			                        exportOptions: {
-			                    columns: [ 0,1,2,3,5,7,9,11 ]
-			                }
-			                    }
-			                ],
-					"search": {
-			            "regex": true
-					},
-					"footerCallback": function ( row, data, start, end, display ) {
-			        	var api = this.api(), data;
-			        	// saca los puntos y <del> de la cadena para pasarlo a entero
-			            var intVal = function(i){
-			            	if(typeof i==='string'){	
-			            		i=i.replace(/[\."<\/*del>""Gs\."]/g, '');
-			            		i=i.replace(/[","]/g, '.');
-			            		i=i*1;		            		
-			            	}else{
-			            		if(typeof i==='number'){
-			            			i=i;		            			
-			            	}else{
-			            		i=0;
-			            	}
-			            }
-			            	return i;
-			            };            
-			               			                
-			             // total general para todas las paginas
-			                total10 = api
-			                    .column( 10 )
-			                    .data()
-			                    .reduce( function (a, b) {
-			                        return intVal(a) + intVal(b);
-			                    }, 0 );
-
-			                // total por pagina 
-			                pageTotal10 = api
-			                    .column( 10, { page: 'current'} )
-			                    .data()
-			                    .reduce( function (a, b) {
-			                        return intVal(a) + intVal(b);
-			                    }, 0 );
-			                		                
-			                
-			                $( api.column( 10 ).footer() ).html(
-			                		'Subtotal: '+ numeroConComa(pageTotal10) +' (Total: '+ numeroConComa(total10) +')'
-			                );
-			        },
-			        language: {
-			            buttons: {
-			                copy: 'Copiar',
-		                print: 'Imprimir'
-			            }
-			        }
-				} );
+				
 				$("#dataTableDestinatarios").DataTable( {
 			        dom: 'Bfrtip',
 			        buttons: [

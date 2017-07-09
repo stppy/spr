@@ -5,3 +5,5 @@ target/*
 
 */pom.properties
 .metadata/*
+.idea/
+*.iml
