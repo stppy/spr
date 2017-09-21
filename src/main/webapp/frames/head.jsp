@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page contentType="text/html; charset=UTF-8"%>
-<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+  <%@ page contentType="text/html; charset=UTF-8"%>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
     <title>spr | STP</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.2 -->
@@ -29,4 +29,4 @@
         <script src="//spr.stp.gov.py/dist/js/respond.min.js"></script>
     <![endif]-->
     <script src="frames/main.js"></script>
-	 <link href="frames/main.css" rel="stylesheet" type="text/css" />
+    <link href="frames/main.css" rel="stylesheet" type="text/css" />
