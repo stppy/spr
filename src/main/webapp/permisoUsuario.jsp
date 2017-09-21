@@ -1,0 +1,381 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%> 
+<%@ page import="org.jasig.cas.client.authentication.AttributePrincipalImpl"%>
+<%@ page import="org.jasig.cas.client.authentication.AttributePrincipal"%>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.util.*" %>
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+  	<!--  ISO-8859-1 -->
+  	<%@ include file="/frames/head.jsp" %>
+ 	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+   	<script src="https://cdnjs.cloudflare.com/ajax/libs/floatthead/1.2.10/jquery.floatThead.min.js"></script> -->	
+        
+	<!--<script src="frames/entidad.js" type="text/javascript"></script> -->
+	<script type="text/javascript" src="dist/canvasjs/canvasjs.min.js" ></script>
+	
+	<link href="bootstrap/css/bootstrapslider.css" rel="stylesheet">
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <style type="text/css">
+		/* Example 1 custom styles */
+		#ex1Slider .slider-selection {
+   			background: #BABABA;
+  		}
+
+    	/* Example 3 custom styles */
+		#RGB {
+    		height: 20px;
+    		background: rgb(128, 128, 128);
+  		}
+		#RC .slider-selection {
+		    background: #FF8282;
+		}
+		#RC .slider-handle {
+			background: red;
+		}
+		#GC .slider-selection {
+			background: #428041;
+		}
+		#GC .slider-handle {
+			background: green;
+		}
+		#BC .slider-selection {
+			background: #8283FF;
+		}
+		#BC .slider-handle {
+			border-bottom-color: blue;
+		}
+		#R, #G, #B {
+			width: 300px;
+		}
+		
+		
+		#slider12a .slider-track-high, #slider12c .slider-track-high {
+			background: #008d4c;
+		}
+		
+		#slider12b .slider-track-low, #slider12c .slider-track-low {
+			background: #d33724;
+		}
+		
+		#slider12c .slider-selection {
+			background: #db8b0b;
+		}
+    </style>
+    
+    
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+</head>
+<body class="skin-blue sidebar-mini sidebar-collapse">
+
+
+
+		
+<% AttributePrincipal user = (AttributePrincipal) request.getUserPrincipal();%>
+<% Map attributes = user.getAttributes(); 
+if (user != null) { %>
+	<%@ include file="/frames/perfil.jsp" %>
+	
+<script>
+<%if (attributes.get("role_id").toString().equals("0") || attributes.get("role_id").toString().equals("1")){%>
+	$(document).ready(function(){
+		
+		var rol_jsp=<%=attributes.get("role_id").toString() %>;
+		
+		var cuerpoTabla = "";
+		cuerpoTabla = "<tr>";
+		for(var u = 0; u < usuarios.length; u++){
+			cuerpoTabla += "<td>"+usuarios[u].id+"</td><td>"+usuarios[u].nombre+"</td><td>"+usuarios[u].entidad+"</td><td>"+usuarios[u].correo+"</td><td>"+usuarios[u].rol_id+"</td><td>"+usuarios[u].rolTablero+"</td><td>"+usuarios[u].rolMovil+"</td>"
+		}
+		cuerpoTabla += "</tr>";
+
+		$("#cuerpoUsuario").append(cuerpoTabla);
+		
+		var webServicesPermisoPorModulo = $.ajax({
+			url:'/ajaxSelects?accion=getPermisosPorModulos&usuarioId='+usuarios[0].id,
+		  	type:'get',
+		  	dataType:'json',
+		  	async:false       
+		}).responseText;
+		webServicesPermisoPorModulo = JSON.parse(webServicesPermisoPorModulo);
+		
+		var webServicesModulos = $.ajax({
+			url:'/ajaxSelects?accion=getModulos',
+		  	type:'get',
+		  	dataType:'json',
+		  	async:false       
+		}).responseText;
+		webServicesModulos = JSON.parse(webServicesModulos);
+		
+		var webServicesRol = $.ajax({
+			url:'/ajaxSelects?accion=getRol',
+		  	type:'get',
+		  	dataType:'json',
+		  	async:false       
+		}).responseText;
+		webServicesRol = JSON.parse(webServicesRol);
+		
+		var optionRoles;
+		var cuerpoTablaModulos;
+
+		for(var p = 0; p < webServicesPermisoPorModulo.length; p++){
+			
+			cuerpoTablaModulos = "";
+			
+			for(var m = 0; m < webServicesModulos.length; m++){
+				if(webServicesModulos[m].id == webServicesPermisoPorModulo[p].moduloId){
+					cuerpoTablaModulos += "<tr><td>"+webServicesModulos[m].nombeModulo+"</td>";
+				}
+			}
+			
+			cuerpoTablaModulos += "<td><form role='form'><div class='form-group'><select class='form-control combo'>";
+			
+			for(k = 0;k<webServicesRol.length; k++){
+				if(webServicesRol[k].id == webServicesPermisoPorModulo[p].roleId){
+					cuerpoTablaModulos += '<option value="'+webServicesPermisoPorModulo[p].id+'-'+webServicesPermisoPorModulo[p].moduloId+'-'+usuarios[0].id+'-'+webServicesRol[k].id+'" selected>'+webServicesRol[k].nombre+'</option>';
+				}else{
+					cuerpoTablaModulos += '<option value="'+webServicesPermisoPorModulo[p].id+'-'+webServicesPermisoPorModulo[p].moduloId+'-'+usuarios[0].id+'-'+webServicesRol[k].id+'">'+webServicesRol[k].nombre+'</option>';
+				}
+			}
+			cuerpoTablaModulos += "</form></div></td></tr>";
+
+			
+			$("#cuerpoModulo").append(cuerpoTablaModulos);
+		}
+			
+    $(".combo").change(function() {
+		var parametros = $(this).val();
+		var idParsed = parametros.split("-"); 
+		var id = idParsed[0];
+		var moduloId = idParsed[1];
+		var usuarioId = idParsed[2];
+		var roleId = idParsed[3];
+		
+		var objeto = new Object();
+		objeto.id = id;
+		objeto.moduloId = moduloId;
+		objeto.usuarioId = usuarioId;
+		objeto.roleId = roleId;
+ 
+		var info = JSON.stringify(objeto);
+		$.ajax({
+		    url: "ajaxUpdate?accion=actPermisoPorModulo",
+		    type: 'POST',
+		    dataType: 'json',
+		    data: info,
+		    contentType: 'application/json',
+		    mimeType: 'application/json',
+		    success: function (data) {
+		    	
+		    	if(data.success == true)
+		    	{
+		    		modalExito();
+		    	}
+		
+		    },
+		
+		    error: function(data,status,er) {
+		    	
+		    }
+		 });
+    });
+    
+	function modalExito() {
+		var nuevoModalExito = '    <div id="modalMensajeExito" class="modal fade">'+
+        '        <div class="modal-dialog">'+
+     '            <div class="modal-content">'+
+     '                 <div class="modal-body alert-success">'+
+     '                    <h3 class="text-center">REGISTRO GUARDADO EXITOSAMENTE</h3>'+
+     '                </div>'+
+     '            </div> '+
+     '        </div>'+
+     '    </div>';
+    $("body").append(nuevoModalExito);
+    $('#modalMensajeExito').on('show.bs.modal', function (){
+        var myModal = $(this);
+        clearTimeout(myModal.data('hideInterval'));
+        myModal.data('hideInterval', setTimeout(function(){
+            myModal.modal('hide');
+        }, 700));
+    }).modal('show')
+}
+	
+	
+});
+	
+<%}else{%>
+	window.location = "http://spr.stp.gov.py/tablero/resumenLineaAccion.jsp";
+<%}%>
+</script>
+
+    <div class="wrapper">
+
+      <header class="main-header">
+		  <%@ include file="/frames/mainheader.jsp" %>
+      </header>
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+  			 <%@ include file="/frames/main-sidebar.jsp" %>
+      </aside>
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            <small>
+            <!--  Titulo, donde antes estaba dashboard -->
+            </small>
+          </h1>
+         
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+	    <!-- Info row de buscador de productos -->
+	    	<div class="row">
+	        	<div class="col-md-12">
+	        		<div class="box box-default box-solid">
+	           			<div class="box-header with-border">
+	            			<h4 class="box-title" >Datos del Usuario</h4>
+	             			<div class="box-tools pull-right"><button class="btn btn-box-tool cargarProyectos" data-widget="collapse"><i class="fa fa-minus"></i></button></div>
+	           			</div>
+	           			<div class="box-body">
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr class="active"><th>IdUsuario</th><th>Nombre</th><th>Entidad</th><th>Correo</th><th>RolSpr</th><th>RolTablero</th><th>RolMovil</th></tr>
+									</thead>
+									<tbody id="cuerpoUsuario">
+									</tbody>
+								</table>
+	      					</div>													
+						
+						</div>
+					</div>
+	    		 </div>
+			</div> 
+				    
+	    	<div class="row">
+	        	<div class="col-md-12">
+	        		<div class="box box-default box-solid">
+	           			<div class="box-header with-border">
+	            			<h4 class="box-title" >Permiso por Modulo</h4>
+	             			<div class="box-tools pull-right"><button class="btn btn-box-tool cargarProyectos" data-widget="collapse"><i class="fa fa-minus"></i></button></div>
+	           			</div>
+	           			<div class="box-body">
+																				
+							<% if (attributes.get("role_id").toString().equals("0") || attributes.get("role_id").toString().equals("1") || attributes.get("role_id").toString().equals("2")){%>	
+	            														
+								<div class="table-responsive">
+									<table class="table">
+										<thead>
+											<tr  class="active"><th>Nombre Modulo</th><th>Rol</th></tr>
+										</thead>
+										<tbody id="cuerpoModulo">
+										</tbody>
+									</table>
+		      					</div>
+		      					
+							<% }%>
+						
+						</div>
+					</div>
+	    		 </div>
+			</div> 
+          
+	                  
+   		 </section><!-- /.content -->
+      </div><!-- /.content-wrapper -->
+
+      <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+          <b>Version</b> 2.0
+        </div>
+        <strong>Copyright &copy; 2015 <a href="http://www.stp.gov.py">STP</a>.</strong> All rights reserved.
+      </footer>
+
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-light">
+		<!-- include file="/frames/control-sidebar.jsp"  -->
+      </aside><!-- /.control-sidebar -->
+      <!-- Add the sidebar's background. This div must be placed
+           immediately after the control sidebar -->
+      <div class='control-sidebar-bg'></div>
+
+    </div><!-- ./wrapper -->
+
+    <!-- jQuery 2.1.3 -->
+    <script src="plugins/jQuery/jQuery-2.1.3.min.js"></script>
+    <!-- Bootstrap 3.3.2 JS -->
+    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+    <script src="plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+    <!-- FastClick -->
+    <script src='plugins/fastclick/fastclick.min.js'></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/app.min.js" type="text/javascript"></script>
+    <!-- Sparkline -->
+    <script src="plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
+    <!-- jvectormap -->
+    <script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
+    <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
+    <!-- daterangepicker -->
+    <script src="plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+    <!-- datepicker -->
+    <script src="plugins/datepicker/bootstrap-datepicker.js" type="text/javascript"></script>
+    <!-- SlimScroll 1.3.0 -->
+    <script src="plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <!-- ChartJS 1.0.1 -->
+    <script src="plugins/chartjs/Chart.min.js" type="text/javascript"></script>
+    
+    
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) 
+    <script src="dist/js/pages/dashboard2.js" type="text/javascript"></script>-->
+    
+    <!-- Librerias para la rutina de cambio de contraseña -->
+    <script src="dist/js/jquerymd5.js" type="text/javascript"></script>    	
+    <%@ include file="/frames/pass.jsp" %>
+    
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js" type="text/javascript"></script>
+     
+        <%  } else { %>
+				est<p>Favor Iniciar Sesion</p>
+			<%} %>
+	
+
+<!-- Piwik -->
+<script type="text/javascript">
+
+
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//infra.stp.gov.py/monitoreoweb/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 9]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//infra.stp.gov.py/monitoreoweb/piwik.php?idsite=9" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code  -->
+
+<script type="text/javascript" src="bootstrap/js/bootstrap-slider.js"></script>
+</body>
+</html>

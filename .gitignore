@@ -1,0 +1,10 @@
+target/
+target/*
+*/target/**
+*.class
+
+*/pom.properties
+.metadata/*
+.DS_Store
+.idea/
+*.iml
