@@ -965,6 +965,7 @@ function Combo(){
           dataType:'json',
           async:false       
         }).responseText;
+
 		todosLosProductosHacienda = JSON.parse(todosLosProductosHacienda);*/
 
       	if(isNaN(linkNivel)==false && isNaN(linkEntidad)==false && isNaN(linkTipoPresupuesto)==false && isNaN(linkPrograma)==false &&
@@ -1679,6 +1680,7 @@ function Combo(){
         					'<th id="sumaMesSPR-'+linkNivel+'-'+linkEntidad+'-'+linkTipoPresupuesto+'-'+linkPrograma+'-'+linkSubPrograma+'-'+linkProyecto+'-'+linkProducto+'-12" class="'+colorear(todosLosProductosHacienda[e].meta12,sumaMes[12])+'">'+parseFloat(sumaMes[12]).round(2)+'</th>';
             		}
         		}*/
+
         	if(band == 0){
     			filaProduct2+=
     				'<tr>'+

@@ -553,7 +553,7 @@ textarea { text-transform: uppercase; }
     <script src="dist/js/pages/dashboard2.js" type="text/javascript"></script>-->
 
     <!-- Librerias para la rutina de cambio de contraseña -->
-    <script src="dist/js/jquerymd5.js" type="text/javascript"></script>  	
+    <script src="dist/js/jquerymd5.js" type="text/javascript"></script>    	
     <%@ include file="/frames/pass.jsp" %>
     
     <!-- AdminLTE for demo purposes -->

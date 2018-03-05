@@ -20,5 +20,6 @@ if (user != null) { %>
 
 </head>
 <body>
+
 </body>
 </html>

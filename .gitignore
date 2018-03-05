@@ -5,6 +5,9 @@ target/*
 
 */pom.properties
 .metadata/*
+<<<<<<< HEAD
 .DS_Store
 .idea/
 *.iml
+=======
+>>>>>>> sprLocal/github
